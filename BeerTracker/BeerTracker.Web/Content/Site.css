@@ -1,0 +1,84 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+}
+
+.container h1 {
+    color: white;
+}
+
+.jumbotron {
+    margin-top: 10px;
+    background-color: yellow;
+}
+
+.navbar {
+    background-color: forestgreen;
+}
+
+.navbar-inverse .navbar-brand {
+    color: yellow;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+    font-size: large;
+}
+
+.container h1, h2 {
+    color: darkgoldenrod;
+    text-shadow: 0px 0px 4px #da1717;
+}
+
+#google-map {
+    border-radius: 10px;
+}
+
+footer a {
+    color: yellow;
+}
+
+.dropdown-menu {
+    background-color: yellow;
+}
+
+.dropdown-menu:hover {
+    display: block;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: forestgreen;

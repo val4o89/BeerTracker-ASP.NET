@@ -1,0 +1,94 @@
+﻿@model BeerTracker.Models.ViewModels.Manage.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h3>Change your account settings</h3>
+    <hr />
+    <div>
+        @if (Model.HasPassword)
+        {
+            @Html.ActionLink("Change your password", "ChangePassword", new { Area = "" }, new { @class = "btn btn-primary" })
+        }
+        else
+        {
+            @Html.ActionLink("Create", "SetPassword", new { Area = "" }, new { @class = "btn btn-primary" })
+        }
+    </div><br />
+    <div>
+        @Html.ActionLink("Manage " + Model.Logins.Count + " External Logins", "ManageLogins", new { Area = "" }, new { @class = "btn btn-primary" })
+    </div>
+    <div>
+        @using (Html.BeginForm("UploadProfilePicture", "Manage", new { Area = "" }, FormMethod.Post, new
+        {
+            @class = "form-horizontal",
+            role = "form",
+            enctype = "multipart/form-data"
+        }))
+        {
+            <input type="file" name="file" value="" class="form-control" />
+            <input type="submit" name="submit" value="Upload picture" class="btn btn-success" />
+        }
+        @*@Html.TextBox("Picture", new { name = "Picture" })*@
+    </div>
+    @*
+        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+         See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+         Uncomment the following block after you have set up two-factor authentication
+    *@
+    @*
+        <dt>Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                }
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+            }
+        </dd>
+    *@
+    @*<dt>Two-Factor Authentication:</dt>
+        <dd>
+            <p>
+                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication.
+            </p>*@
+    @*@if (Model.TwoFactor)
+        {
+            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>Enabled
+                <input type="submit" value="Disable" class="btn btn-link" />
+                </text>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>Disabled
+                <input type="submit" value="Enable" class="btn btn-link" />
+                </text>
+            }
+        }*@
+    </dd>
+    </dl>
+</div>
