@@ -68,6 +68,7 @@ namespace BeerTracker.Web.App_Start
             kernel.Bind<IBeerService>().To<BeerService>();
             kernel.Bind<IAccountService>().To<AccountService>();
             kernel.Bind<IManageService>().To<ManageService>();
+            kernel.Bind<IUserService>().To<UserService>();
         }
     }
 }

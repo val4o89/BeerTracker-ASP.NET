@@ -59,7 +59,7 @@ textarea {
     font-size: large;
 }
 
-.container h1, h2 {
+.container h1, h2, h3, h4 {
     color: darkgoldenrod;
     text-shadow: 0px 0px 4px #da1717;
 }
@@ -76,9 +76,48 @@ footer a {
     background-color: yellow;
 }
 
-.dropdown-menu:hover {
-    display: block;
+    .dropdown-menu:hover {
+        display: block;
+    }
+
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+        background-color: forestgreen;
+    }
+
+div .table-bordered {
+    color: yellow;
+    background-color: forestgreen;
+    opacity: 0.9;
+    border-radius: 10px;
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color: forestgreen;
+.table-bordered {
+    border-collapse: separate;
+}
+.table-bordered {
+    border: solid #ccc 1px;
+    border-radius: 6px;
+    border-left:0px;
+}
+.table-bordered td, .table-bordered th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+.table-bordered th {
+    border-top: none;
+}
+.table-bordered th:first-child {
+    border-radius: 6px 0 0 0;
+}
+.table-bordered th:last-child {
+    border-radius: 0 6px 0 0;
+}
+.table-bordered th:only-child{
+    border-radius: 6px 6px 0 0;
+}
+.table-bordered tr:last-child td:first-child {
+    border-radius: 0 0 0 6px;
+}
+.table-bordered tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
+}

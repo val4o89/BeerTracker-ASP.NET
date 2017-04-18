@@ -257,6 +257,7 @@
     <Content Include="Areas\User\Views\Geo\HideBeer.cshtml" />
     <Content Include="Areas\User\Views\Geo\FindBeer.cshtml" />
     <Content Include="Areas\User\Views\Shared\_HideFindBeer.cshtml" />
+    <Content Include="Areas\User\Views\User\MyBeers.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

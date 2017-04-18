@@ -1,0 +1,53 @@
+﻿@model BeerTracker.Models.ViewModels.User.MyBeersViewModel
+@{
+    ViewBag.Title = "MyBeers";
+}
+
+<h2>MyBeers</h2>
+<br />
+<div class="col-md-6">
+    <h3>Found beers</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>End of serial number</th>
+                <th>Miner</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var beer in Model.FoundBeers)
+            {
+                <tr>
+                    <td>@beer.Manufacturer</td>
+                    <td>@beer.EndOfSerialNumber</td>
+                    <td>@beer.Miner</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-md-6">
+    <h3>Hidden beers</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>End of serial number</th>
+                <th>Founder</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var beer in Model.HiddenBeers)
+            {
+                string beerFounder = beer.Founder ?? "Still not found";
+                <tr>
+                    <td>@beer.Manufacturer</td>
+                    <td>@beer.EndOfSerialNumber</td>
+                    <td>@beerFounder</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />

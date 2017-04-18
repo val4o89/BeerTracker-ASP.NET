@@ -4,6 +4,7 @@
     using Data;
     using Models.DataModels;
     using Models.ViewModels.Geo;
+    using Models.ViewModels.User;
     using System;
 
     public class BaseService
@@ -29,7 +30,16 @@
             configuration = new MapperConfiguration(m =>
             {
                 m.CreateMap<Location, BeerLocationViewModel>();
+
+                m.CreateMap<Beer, MyFoundBeerViewModel>()
+                .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
+                .ForMember(mfbvm => mfbvm.Miner, member => member.MapFrom(b => b.Miner.AppUser.UserName));
+
+                m.CreateMap<Beer, MyHiddenBeerViewModel>()
+                .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
+                .ForMember(mfbvm => mfbvm.Founder, member => member.MapFrom(b => b.Founder.AppUser.UserName));
             });
         }
+
     }
 }

@@ -16,9 +16,11 @@
         <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Hello @User.Identity.GetUserName()!</a>
             <ul class="dropdown-menu">
-                <li>@Html.ActionLink("My Profile", "Index", "Manage", routeValues: "Area = \"\"", htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
-                <li>@Html.ActionLink("External Logins", "ManageLogins", "Manage", routeValues: "Area = \"\"", htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
-                <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", routeValues: "Area = \"\"", htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
+                <li>@Html.ActionLink("My Profile", "Index", "Manage", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
+                <li>@Html.ActionLink("My Beers", "MyBeers", "User", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
+                <li>@Html.ActionLink("External Logins", "ManageLogins", "Manage", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
+                <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
+
             </ul>
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

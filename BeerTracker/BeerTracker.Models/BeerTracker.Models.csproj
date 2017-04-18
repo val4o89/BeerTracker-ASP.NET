@@ -132,6 +132,9 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Geo\BeerLocationViewModel.cs" />
     <Compile Include="ViewModels\Geo\LocateBeerViewModel.cs" />
+    <Compile Include="ViewModels\User\MyBeersViewModel.cs" />
+    <Compile Include="ViewModels\User\MyFoundBeerViewModel.cs" />
+    <Compile Include="ViewModels\User\MyHiddenBeerViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
