@@ -3,6 +3,8 @@
     using AutoMapper;
     using Data;
     using Models.DataModels;
+    using Models.DataModels.UserModels;
+    using Models.ViewModels.Admin;
     using Models.ViewModels.Geo;
     using Models.ViewModels.User;
     using System;
@@ -38,6 +40,8 @@
                 m.CreateMap<Beer, MyHiddenBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
                 .ForMember(mfbvm => mfbvm.Founder, member => member.MapFrom(b => b.Founder.AppUser.UserName));
+
+                m.CreateMap<ApplicationUser, UserViewModel>();
             });
         }
 

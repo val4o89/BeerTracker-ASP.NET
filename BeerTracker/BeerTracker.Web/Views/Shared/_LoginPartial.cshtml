@@ -1,36 +1,33 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated && User.IsInRole("RegularUser"))
+﻿@if (Request.IsAuthenticated && (User.IsInRole("RegularUser") || User.IsInRole("Administrator")))
 {
     <ul class="nav navbar-nav navbar-left">
         <li>@Html.ActionLink("Show All", "ShowAll", "Geo", new { Area = "User" }, new { id = "my-location" })</li>
         <li>@Html.ActionLink("Hide Beer", "HideBeer", "Geo", new { Area = "User" }, null)</li>
         <li>@Html.ActionLink("Find Beer", "FindBeer", "Geo", new { Area = "User" }, null)</li>
     </ul>
-
-
     using (Html.BeginForm("LogOff", "Account", new { Area = "" }, FormMethod.Post, htmlAttributes: new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Hello @User.Identity.GetUserName()!</a>
-            <ul class="dropdown-menu">
-                <li>@Html.ActionLink("My Profile", "Index", "Manage", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
-                <li>@Html.ActionLink("My Beers", "MyBeers", "User", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
-                <li>@Html.ActionLink("External Logins", "ManageLogins", "Manage", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
-                <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", new { Area = "" }, htmlAttributes: new { title = "Manage", @class = "dropdown open" })</li>
+        <ul class="nav navbar-nav navbar-right">
 
-            </ul>
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>   
+            @if (User.IsInRole("Administrator"))
+            {
+                @Html.Partial("_AdminDropdownMenu");
+            }
+
+            @Html.Partial("_RegularUserDropdownMenu")
+
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", new { Area = ""}, new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Register", "Register", "Account", new { Area = "" }, new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", new { Area = "" }, new { id = "loginLink" })</li>
     </ul>
 }
+
+

@@ -121,3 +121,7 @@ div .table-bordered {
 .table-bordered tr:last-child td:last-child {
     border-radius: 0 0 6px 0;
 }
+
+p {
+    color: yellow;
+}

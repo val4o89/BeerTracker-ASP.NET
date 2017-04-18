@@ -1,0 +1,37 @@
+﻿@model PagedList.IPagedList<BeerTracker.Models.ViewModels.Admin.UserViewModel>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Manage User Roles";
+}
+
+<h2>ManageUserRoles</h2>
+
+<div class="col-md-10">
+    <h3>Users</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@Html.ActionLink("Edit Roles", "EditRole", new { Area = "Admin", Id = user.Id }, new { @class = "btn btn-warning" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pager">
+        @Html.PagedListPager(Model, page => Url.Action("ManageUserRoles", new
+   {
+       page
+   }))
+        <p>Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Users</p>
+    </div>
+</div>
+

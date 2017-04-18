@@ -130,6 +130,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\UserViewModel.cs" />
     <Compile Include="ViewModels\Geo\BeerLocationViewModel.cs" />
     <Compile Include="ViewModels\Geo\LocateBeerViewModel.cs" />
     <Compile Include="ViewModels\User\MyBeersViewModel.cs" />
