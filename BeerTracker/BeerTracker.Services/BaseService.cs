@@ -1,23 +1,22 @@
 ﻿namespace BeerTracker.Services
 {
     using AutoMapper;
-    using Data;
     using Models.DataModels;
-    using Models.DataModels.UserModels;
     using Models.ViewModels.Admin;
     using Models.ViewModels.Geo;
     using Models.ViewModels.User;
-    using System;
+    using UnitOfWork.Contracts;
+    using UnitOfWork.UoW;
 
     public class BaseService
     {
-        protected ApplicationDbContext db;
+        protected IUnitOfWork db;
         protected IMapper mapper;
         protected MapperConfiguration configuration;
 
-        public BaseService()
+        public BaseService(IUnitOfWork db)
         {
-            this.db = new ApplicationDbContext();
+            this.db = db;
             this.ConfigureMapper();
             this.CreateMapper();
         }

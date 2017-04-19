@@ -7,13 +7,18 @@
     using Models.DataModels;
     using System.Collections.Generic;
     using Models.ViewModels.User;
+    using UnitOfWork.Contracts;
 
     public class UserService : BaseService, IUserService
     {
+        public UserService(IUnitOfWork db) : base(db)
+        {
+
+        }
         public MyBeersViewModel GetAllMineBeers(string username)
         {
-            var myHiddenBeers = this.db.Beers.Where(b => b.Miner.AppUser.UserName == username).ToList();
-            var myFoundBeers = this.db.Beers.Where(b => b.IsFound == true && b.Founder.AppUser.UserName == username).ToList();
+            var myHiddenBeers = this.db.Beers.FindMany(b => b.Miner.AppUser.UserName == username).ToList();
+            var myFoundBeers = this.db.Beers.FindMany(b => b.IsFound == true && b.Founder.AppUser.UserName == username).ToList();
 
             var myHiddenBeersViewModel = this.mapper.Map<IEnumerable<Beer>, IEnumerable<MyHiddenBeerViewModel>>(myHiddenBeers);
             var myFoundBeersViewModel =  this.mapper.Map<IEnumerable<Beer>, IEnumerable<MyFoundBeerViewModel>>(myFoundBeers);

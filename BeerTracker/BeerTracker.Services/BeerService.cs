@@ -10,16 +10,17 @@
     using System.Linq;
     using Models.DataModels.Enums;
     using System.Data.Entity.Validation;
+    using UnitOfWork.Contracts;
 
     public class BeerService : BaseService, IBeerService
     {
-        public BeerService() : base()
+        public BeerService(IUnitOfWork db) : base(db)
         {
         }
 
         public IEnumerable<BeerLocationViewModel> GetLocations()
         {
-            IEnumerable<Location> locations = this.db.Locations.Where(l => l.Beer.IsFound == false);
+            IEnumerable<Location> locations = this.db.Locations.FindMany(l => l.Beer.IsFound == false);
 
             var loc = new Location();
 
@@ -30,7 +31,7 @@
 
         public void HideBeer(HideFindBeerBindingModel model, string name)
         {
-            var user = this.db.RegularUsers.FirstOrDefault(ru => ru.AppUser.UserName == name);
+            var user = this.db.RegularUsers.FindFirst(ru => ru.AppUser.UserName == name);
 
             user.Points++;
 
@@ -55,9 +56,9 @@
 
         public void FindBeer(HideFindBeerBindingModel model, string username)
         {
-            var loggedUser = this.db.RegularUsers.FirstOrDefault(u => u.AppUser.UserName == username);
+            var loggedUser = this.db.RegularUsers.FindFirst(u => u.AppUser.UserName == username);
 
-            var foundBeer = this.db.Beers.FirstOrDefault(b => b.IsFound == false && 
+            var foundBeer = this.db.Beers.FindFirst(b => b.IsFound == false && 
             b.EndOfSerialNumber == model.EndOfSerialNumber &&
             b.Manufacturer.ToString() == model.Manufacturer);
 

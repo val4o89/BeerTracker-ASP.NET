@@ -339,6 +339,10 @@
       <Project>{5056C1A7-30B4-4D27-BCEB-573DF2377619}</Project>
       <Name>BeerTracker.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UnitOfWork\UnitOfWork.csproj">
+      <Project>{860E352E-5B0C-4D5E-B363-2DD5A9F0BBAE}</Project>
+      <Name>UnitOfWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

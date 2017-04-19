@@ -116,13 +116,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BeerTracker.Data\BeerTracker.Data.csproj">
-      <Project>{C56148C1-EAAB-484F-91A3-F7DDD29E1E3F}</Project>
-      <Name>BeerTracker.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BeerTracker.Models\BeerTracker.Models.csproj">
       <Project>{9CA20EFA-34B6-4B0F-9B5B-A1ACD1164753}</Project>
       <Name>BeerTracker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnitOfWork\UnitOfWork.csproj">
+      <Project>{860e352e-5b0c-4d5e-b363-2dd5a9f0bbae}</Project>
+      <Name>UnitOfWork</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

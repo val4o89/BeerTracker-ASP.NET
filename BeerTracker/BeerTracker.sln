@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerTracker.Models", "BeerT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerTracker.Services", "BeerTracker.Services\BeerTracker.Services.csproj", "{5056C1A7-30B4-4D27-BCEB-573DF2377619}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWork", "UnitOfWork\UnitOfWork.csproj", "{860E352E-5B0C-4D5E-B363-2DD5A9F0BBAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5056C1A7-30B4-4D27-BCEB-573DF2377619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5056C1A7-30B4-4D27-BCEB-573DF2377619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5056C1A7-30B4-4D27-BCEB-573DF2377619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{860E352E-5B0C-4D5E-B363-2DD5A9F0BBAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{860E352E-5B0C-4D5E-B363-2DD5A9F0BBAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{860E352E-5B0C-4D5E-B363-2DD5A9F0BBAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{860E352E-5B0C-4D5E-B363-2DD5A9F0BBAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

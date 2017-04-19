@@ -14,6 +14,8 @@ namespace BeerTracker.Web.App_Start
     using Services;
     using System.Runtime.InteropServices.ComTypes;
     using System.IO;
+    using UnitOfWork.Contracts;
+    using UnitOfWork.UoW;
 
     public static class NinjectWebCommon 
     {
@@ -70,6 +72,7 @@ namespace BeerTracker.Web.App_Start
             kernel.Bind<IManageService>().To<ManageService>();
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IAdminService>().To<AdminService>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }
 }
