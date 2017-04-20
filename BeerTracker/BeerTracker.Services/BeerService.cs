@@ -57,6 +57,7 @@
         public void FindBeer(HideFindBeerBindingModel model, string username)
         {
             var loggedUser = this.db.RegularUsers.FindFirst(u => u.AppUser.UserName == username);
+            var appUser = loggedUser.AppUser;
 
             var foundBeer = this.db.Beers.FindFirst(b => b.IsFound == false && 
             b.EndOfSerialNumber == model.EndOfSerialNumber &&
@@ -70,15 +71,13 @@
                 }
 
                 var distance = this.GetDistanceDifference(foundBeer.Location.Latitude, foundBeer.Location.Longitude, 
-                                                                model.Latitude, model.Longitude);
+                               model.Latitude, model.Longitude);
+
                 if (IfDistanceIsValid(distance, 0.3))
                 {
                     foundBeer.IsFound = true;
                     foundBeer.Founder = loggedUser;
                     loggedUser.Points++;
-
-                    //Code porn
-                    loggedUser.AppUser = loggedUser.AppUser;
 
                     this.db.SaveChanges();
                 }

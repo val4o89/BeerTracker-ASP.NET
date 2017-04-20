@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
 
@@ -22,6 +23,6 @@
         bool Any();
         bool Any(Expression<Func<TEntity, bool>> predicate);
 
-        IEnumerable<TResult> Select<TResult>(Expression<Func<TEntity, TResult>> predicate);
+        IQueryable<TResult> Select<TResult>(Expression<Func<TEntity, TResult>> predicate);
     }
 }

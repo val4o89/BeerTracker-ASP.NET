@@ -5,10 +5,11 @@
     using Models.ViewModels.Admin;
     using Models.ViewModels.Geo;
     using Models.ViewModels.User;
+    using PagedList;
     using UnitOfWork.Contracts;
     using UnitOfWork.UoW;
 
-    public class BaseService
+    public abstract class BaseService
     {
         protected IUnitOfWork db;
         protected IMapper mapper;
@@ -41,6 +42,7 @@
                 .ForMember(mfbvm => mfbvm.Founder, member => member.MapFrom(b => b.Founder.AppUser.UserName));
 
                 m.CreateMap<ApplicationUser, UserViewModel>();
+
             });
         }
 

@@ -114,10 +114,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ValidateRoleToRemoveAttribute.cs" />
+    <Compile Include="BindingModels\Account\ManageUserRoleBindingModel.cs" />
     <Compile Include="BindingModels\Geo\HideFindBeerBindingModel.cs" />
     <Compile Include="DataModels\ApplicationUser.cs" />
     <Compile Include="DataModels\Beer.cs" />
     <Compile Include="DataModels\Enums\BeerMake.cs" />
+    <Compile Include="DataModels\Enums\UserRoles.cs" />
     <Compile Include="DataModels\Location.cs" />
     <Compile Include="DataModels\UserModels\RegularUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\EditUserRoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
     <Compile Include="ViewModels\Geo\BeerLocationViewModel.cs" />
     <Compile Include="ViewModels\Geo\LocateBeerViewModel.cs" />

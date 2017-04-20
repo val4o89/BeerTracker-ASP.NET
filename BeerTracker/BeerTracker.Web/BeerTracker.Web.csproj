@@ -272,6 +272,7 @@
     <Content Include="Areas\Admin\Views\Admin\ManageUserRoles.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\EditRole.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -353,7 +354,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>

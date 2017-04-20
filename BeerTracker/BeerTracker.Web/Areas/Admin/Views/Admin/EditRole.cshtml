@@ -1,0 +1,78 @@
+﻿@model BeerTracker.Models.ViewModels.Admin.EditUserRoleViewModel
+@{
+    ViewBag.Title = "Edit Role";
+}
+
+<h1>Edit Role</h1>
+<hr />
+
+<h2>@Model.UserName</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h3>Implemented roles &#x21D8;</h3>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model.ImplementedRoles)
+                {
+                    using (Html.BeginForm("RemoveRole", "Account", new { Area = "" }, FormMethod.Post, new { onsubmit = $"return isValid('{@role}')" }))
+                    {
+                        <tr>
+                            <td>@role</td>
+                            <td hidden="hidden"><input type="text" name="roleName" value="@role" /></td>
+                            <td hidden="hidden"><input type="text" name="userId" value="@Model.UserId" /></td>
+                            <td><input class="btn btn-danger" type="submit" value="Remove" /></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-6">
+        <h3>Not implemented roles &#x21D8;</h3>
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model.AllRoles)
+                {
+                    using (Html.BeginForm("AddRole", "Account", new { Area = "" }, FormMethod.Post, null))
+                    {
+                        <tr>
+                            <td>@role</td>
+                            <td hidden="hidden"><input type="text" name="roleName" value="@role" /></td>
+                            <td hidden="hidden"><input type="text" name="userId" value="@Model.UserId" /></td>
+                            <td><input class="btn btn-success" type="submit" value="Add" /></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+function isValid(role)
+{
+    console.log(role);
+    if (role === "Administrator") {
+        alert("Sorry, you can't remove \"Administrator\" role from this user!!!");
+        return false;
+    }
+  return true;
+}
+</script>

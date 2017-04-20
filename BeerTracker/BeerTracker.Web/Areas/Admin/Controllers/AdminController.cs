@@ -1,10 +1,7 @@
 ﻿using BeerTracker.Models.ViewModels.Admin;
 using BeerTracker.Services.Contracts;
+using Microsoft.AspNet.Identity;
 using PagedList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BeerTracker.Web.Areas.Admin.Controllers
@@ -14,7 +11,6 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private IAdminService service;
-
         public AdminController(IAdminService service)
         {
             this.service = service;
@@ -32,6 +28,13 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Route("EditRole/{userId}")]
+        [HttpGet]
+        public ActionResult EditRole(string userId)
+        {
+            EditUserRoleViewModel model = this.service.GetUserRoles(userId);
 
+            return this.View(model);
+        }
     }
 }

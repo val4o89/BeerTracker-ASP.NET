@@ -12,6 +12,7 @@
         public ApplicationDbContext()   
             : base("BeerTracker")
         {
+            
         }
 
         public DbSet<Location> Locations { get; set; }

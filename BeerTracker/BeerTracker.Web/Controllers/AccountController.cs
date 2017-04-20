@@ -12,6 +12,8 @@ using BeerTracker.Models.ViewModels.Account;
 using BeerTracker.Models.DataModels;
 using BeerTracker.Services;
 using BeerTracker.Services.Contracts;
+using BeerTracker.Models.DataModels.Enums;
+using BeerTracker.Models.BindingModels.Account;
 
 namespace BeerTracker.Web.Controllers
 {
@@ -173,7 +175,8 @@ namespace BeerTracker.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:true, rememberBrowser:true);
 
-                    this.AddUserInRole(UserManager, user.Id, "RegularUser");
+                    this.service.AddToRole(UserManager, user.Id, UserRoles.RegularUser.ToString());
+
                     this.service.CreateRegularUser(user.Id);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -442,14 +445,26 @@ namespace BeerTracker.Web.Controllers
             base.Dispose(disposing);
         }
 
-        private void AddUserInRole(UserManager<ApplicationUser> userManager, string userId, string userRole)
+        [HttpPost]
+        public ActionResult RemoveRole(ManageUserRoleBindingModel model)
         {
-            var addAdminToRoleResult = userManager.AddToRole(userId, userRole);
-
-            if (!addAdminToRoleResult.Succeeded)
+            if (ModelState.IsValid)
             {
-                throw new Exception(string.Join(";", addAdminToRoleResult.Errors));
+                this.service.RemoveFromRole(UserManager, model.UserId, model.RoleName);
             }
+
+            return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId });
+        }
+
+        [HttpPost]
+        public ActionResult AddRole(ManageUserRoleBindingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                this.service.AddToRole(UserManager, model.UserId, model.RoleName);
+            }
+
+            return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId});
         }
 
         #region Helpers

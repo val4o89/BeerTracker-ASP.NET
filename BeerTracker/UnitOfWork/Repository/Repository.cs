@@ -62,7 +62,7 @@
         }
 
 
-        public IEnumerable<TResult> Select<TResult>(Expression<Func<TEntity, TResult>> predicate)
+        public IQueryable<TResult> Select<TResult>(Expression<Func<TEntity, TResult>> predicate)
         {
             return this.context.Set<TEntity>().Select(predicate);
         }

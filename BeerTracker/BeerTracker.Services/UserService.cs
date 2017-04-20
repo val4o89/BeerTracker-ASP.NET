@@ -17,8 +17,8 @@
         }
         public MyBeersViewModel GetAllMineBeers(string username)
         {
-            var myHiddenBeers = this.db.Beers.FindMany(b => b.Miner.AppUser.UserName == username).ToList();
-            var myFoundBeers = this.db.Beers.FindMany(b => b.IsFound == true && b.Founder.AppUser.UserName == username).ToList();
+            IEnumerable<Beer> myHiddenBeers = this.db.Beers.FindMany(b => b.Miner.AppUser.UserName == username).ToList();
+            IEnumerable<Beer> myFoundBeers = this.db.Beers.FindMany(b => b.IsFound == true && b.Founder.AppUser.UserName == username).ToList();
 
             var myHiddenBeersViewModel = this.mapper.Map<IEnumerable<Beer>, IEnumerable<MyHiddenBeerViewModel>>(myHiddenBeers);
             var myFoundBeersViewModel =  this.mapper.Map<IEnumerable<Beer>, IEnumerable<MyFoundBeerViewModel>>(myFoundBeers);
