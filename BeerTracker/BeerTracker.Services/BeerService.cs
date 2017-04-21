@@ -45,7 +45,7 @@
                 Beer = new Beer
                 {
                     EndOfSerialNumber = model.EndOfSerialNumber,
-                    Miner = user,
+                    Hider = user,
                     Manufacturer = (BeerMake)Enum.Parse(typeof(BeerMake), model.Manufacturer)
 
                 }
@@ -65,7 +65,7 @@
 
             if (foundBeer != null)
             {
-                if (foundBeer.Miner == loggedUser)
+                if (foundBeer.Hider == loggedUser)
                 {
                     return;
                 }

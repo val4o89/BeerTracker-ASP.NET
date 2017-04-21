@@ -119,9 +119,11 @@
     <Compile Include="BindingModels\Geo\HideFindBeerBindingModel.cs" />
     <Compile Include="DataModels\ApplicationUser.cs" />
     <Compile Include="DataModels\Beer.cs" />
+    <Compile Include="DataModels\Contest.cs" />
     <Compile Include="DataModels\Enums\BeerMake.cs" />
     <Compile Include="DataModels\Enums\UserRoles.cs" />
     <Compile Include="DataModels\Location.cs" />
+    <Compile Include="DataModels\UserModels\Partner.cs" />
     <Compile Include="DataModels\UserModels\RegularUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />

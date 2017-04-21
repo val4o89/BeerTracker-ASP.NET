@@ -31,10 +31,12 @@ namespace BeerTracker.Models.DataModels.UserModels
 
         public int Points { get; set; }
 
-        [InverseProperty("Miner")]
+        [InverseProperty("Hider")]
         public virtual ICollection<Beer> BeersHidden { get; set; }
 
         [InverseProperty("Founder")]
         public virtual ICollection<Beer> BeersFound { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

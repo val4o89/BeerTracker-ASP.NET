@@ -17,7 +17,7 @@
 
         public virtual Location Location { get; set; }
 
-        public virtual RegularUser Miner { get; set; }
+        public virtual RegularUser Hider { get; set; }
 
         public virtual RegularUser Founder { get; set; }
 

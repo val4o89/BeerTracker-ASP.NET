@@ -35,7 +35,7 @@
 
                 m.CreateMap<Beer, MyFoundBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
-                .ForMember(mfbvm => mfbvm.Miner, member => member.MapFrom(b => b.Miner.AppUser.UserName));
+                .ForMember(mfbvm => mfbvm.Miner, member => member.MapFrom(b => b.Hider.AppUser.UserName));
 
                 m.CreateMap<Beer, MyHiddenBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
