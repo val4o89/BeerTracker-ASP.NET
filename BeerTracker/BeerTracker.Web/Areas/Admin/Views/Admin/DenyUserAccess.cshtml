@@ -1,12 +1,13 @@
 ﻿@model PagedList.IPagedList<BeerTracker.Models.ViewModels.Admin.UserViewModel>
 @using PagedList.Mvc;
+
 @{
-    ViewBag.Title = "Manage User Roles";
+    ViewBag.Title = "Deny User Access";
 }
 
-<h2>Manage User Roles</h2>
+<h2>Deny User Access</h2>
 
-@using (Ajax.BeginForm("ManageUserRoles", "Admin", new { Area = "Admin" }, new AjaxOptions()
+@using (Ajax.BeginForm("DenyUserAccess", "Admin", new { Area = "Admin", Page = 1 }, new AjaxOptions()
 {
     UpdateTargetId = "element-to-replace",
     HttpMethod = "get",
@@ -15,14 +16,15 @@
 }, new { @class = "form-inline", role = "form" }))
 {
     <div>
-        @Html.TextBox("keyword", null, new { type = "text", @class = "form-control", placeholder = "Search by username"})
+        @Html.TextBox("keyword", null, new { type = "text", @class = "form-control", placeholder = "Search by username" })
         <button class="btn btn-info" type="submit">Search</button>
     </div>
 
 }
+
 <div class="col-md-10">
     <h3>Users</h3>
     <div id="element-to-replace">
-        @Html.Partial("_ManageUserRoles")
+        @Html.Partial("_DenyUserAccess")
     </div>
 </div>

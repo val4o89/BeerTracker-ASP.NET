@@ -18,6 +18,7 @@
 
         private IRepository<ApplicationUser> appUsers;
         private IRepository<RegularUser> regularUsers;
+        private IRepository<Partner> partners;
         private IRepository<Location> locations;
         private IRepository<Beer> beers;
 
@@ -35,6 +36,10 @@
         public IRepository<RegularUser> RegularUsers
         {
             get { return this.regularUsers ?? (regularUsers = new Repository<RegularUser>(this.context)); }
+        }
+        public IRepository<Partner> Partners
+        {
+            get { return this.partners ?? (partners = new Repository<Partner>(this.context)); }
         }
 
         public IRepository<Location> Locations

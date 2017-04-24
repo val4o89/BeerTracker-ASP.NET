@@ -17,25 +17,29 @@
         {
         }
 
-        public void CreateRegularUser(string id)
-        {
-            var applicationUser = this.db.AppUsers.FindFirst(u => u.Id == id);
+        //public void CreateRegularUser(string id)
+        //{
+        //    var applicationUser = this.db.AppUsers.FindFirst(u => u.Id == id);
 
-            this.db.RegularUsers.Add(new RegularUser
-            {
-                Points = 0,
-                RegistrationDate = DateTime.Now,
-                AppUser = applicationUser
-            });
+        //    this.db.RegularUsers.Add(new RegularUser
+        //    {
+        //        Points = 0,
+        //        RegistrationDate = DateTime.Now,
+        //        AppUser = applicationUser
+        //    });
 
-            this.db.SaveChanges();
-        }
+        //    this.db.SaveChanges();
+        //}
 
         public void RemoveFromRole(UserManager<ApplicationUser> userManager, string userId, string roleName)
         {
             var removeRoleResult = userManager.RemoveFromRole(userId, roleName);
 
-            if (!removeRoleResult.Succeeded)
+            if (removeRoleResult.Succeeded)
+            {
+                this.RetrieveInstanceForRole(userId, roleName, false);
+            }
+            else
             {
                 throw new Exception(string.Join(";", removeRoleResult.Errors));
             }
@@ -45,10 +49,70 @@
         {
             var addRoleResult = userManager.AddToRole(userId, roleName);
 
-            if (!addRoleResult.Succeeded)
+            if (addRoleResult.Succeeded)
+            {
+                this.RetrieveInstanceForRole(userId, roleName, true);
+            }
+            else
             {
                 throw new Exception(string.Join(";", addRoleResult.Errors));
             }
+        }
+
+        private void RetrieveInstanceForRole(string userId, string roleName, bool isActive)
+        {
+            if (roleName == UserRoles.RegularUser.ToString())
+            {
+                var user = this.db.RegularUsers.FindFirst(ru => ru.AppUserId == userId);
+
+                if (user != null)
+                {
+                    user.AppUser = user.AppUser;
+                    user.IsActive = isActive;
+                }
+                else
+                {
+                    this.db.RegularUsers.Add(new RegularUser
+                    {
+                        AppUser = this.db.AppUsers.FindFirst(u => u.Id == userId),
+                        RegistrationDate = DateTime.Now,
+                        IsActive = isActive
+                    });
+                }
+            }
+
+            if (roleName == UserRoles.Partner.ToString())
+            {
+                var user = this.db.Partners.FindFirst(ru => ru.AppUserId == userId);
+
+                if (user != null)
+                {
+                    user.AppUser = user.AppUser;
+                    user.IsActive = isActive;
+                }
+                else
+                {
+                    this.db.Partners.Add(new Partner
+                    {
+                        AppUser = this.db.AppUsers.FindFirst(u => u.Id == userId),
+                        RegistrationDate = DateTime.Now,
+                        IsActive = isActive
+                    });
+                }
+            }
+
+            this.db.SaveChanges();
+        }
+
+        public string GetUsernameIfIsActive(ApplicationUser user)
+        {
+            return user.IsActive ? user.UserName : string.Empty;
+        }
+
+        public void ModifyUserAccess(string userId, bool isActive)
+        {
+            this.db.AppUsers.FindFirst(u => u.Id == userId).IsActive = isActive;
+            this.db.SaveChanges();
         }
     }
 }

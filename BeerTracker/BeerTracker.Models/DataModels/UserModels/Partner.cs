@@ -23,7 +23,6 @@
 
         public virtual ICollection<Contest> Contests { get; set; }
 
-        public decimal MoneyBallance { get; set; }
 
         public bool IsActive { get; set; }
     }

@@ -86,14 +86,17 @@ namespace BeerTracker.Web.Controllers
 
             if (model.EmailOrUsername.Contains("@"))
             {
-                username = UserManager.FindByEmail(model.EmailOrUsername).UserName;
+                var user = UserManager.FindByEmail(model.EmailOrUsername);
+                username = this.service.GetUsernameIfIsActive(user);
             }
             else
             {
-                username = model.EmailOrUsername;
+                var user = UserManager.FindByName(model.EmailOrUsername);
+                username = this.service.GetUsernameIfIsActive(user);
             }
 
             var result = await SignInManager.PasswordSignInAsync(username, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -169,7 +172,7 @@ namespace BeerTracker.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, FullName = model.FullName };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, FullName = model.FullName, IsActive = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -177,7 +180,7 @@ namespace BeerTracker.Web.Controllers
 
                     this.service.AddToRole(UserManager, user.Id, UserRoles.RegularUser.ToString());
 
-                    this.service.CreateRegularUser(user.Id);
+                    //this.service.CreateRegularUser(user.Id);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -467,6 +470,16 @@ namespace BeerTracker.Web.Controllers
             return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId});
         }
 
+        [HttpPost]
+        public ActionResult UserAccess(AccessUserBindingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                this.service.ModifyUserAccess(model.UserId, model.IsActive);
+            }
+
+            return RedirectToAction(model.RedirectToAction, "Admin", new { Area = "Admin" , Page = model.Page});
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

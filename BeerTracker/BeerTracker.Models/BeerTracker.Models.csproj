@@ -116,6 +116,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ValidateRoleToRemoveAttribute.cs" />
     <Compile Include="BindingModels\Account\ManageUserRoleBindingModel.cs" />
+    <Compile Include="BindingModels\Account\AccessUserBindingModel.cs" />
     <Compile Include="BindingModels\Geo\HideFindBeerBindingModel.cs" />
     <Compile Include="DataModels\ApplicationUser.cs" />
     <Compile Include="DataModels\Beer.cs" />
@@ -151,7 +152,9 @@
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BindingModels\Admin\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

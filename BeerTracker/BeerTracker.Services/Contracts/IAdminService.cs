@@ -8,7 +8,8 @@ namespace BeerTracker.Services.Contracts
 {
     public interface IAdminService
     {
-        IPagedList<UserViewModel> GetUsersToManage(int page);
+        IPagedList<UserViewModel> GetUsersToManage(int page, bool areActive, bool includeAdmin, string keyword);
         EditUserRoleViewModel GetUserRoles(string userId);
+        int GetCorrectPage(int? page);
     }
 }

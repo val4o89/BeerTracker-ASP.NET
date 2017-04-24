@@ -16,14 +16,20 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             this.service = service;
         }
 
-        [Route("ManageUserRoles/{page:int?}")]
+        [Route("ManageUserRoles/{page:int?}/{keyword?}")]
         [HttpGet]
-        public ActionResult ManageUserRoles(int? page)
+        public ActionResult ManageUserRoles(int? page, string keyword)
         {
-            page = page ?? 1;
-            page = page <= 0 ? 1 : page;
+            int requestedPage = this.service.GetCorrectPage(page);
 
-            IPagedList<UserViewModel> model = this.service.GetUsersToManage((int)page);
+            IPagedList<UserViewModel> model = this.service.GetUsersToManage(requestedPage, true, true, keyword);
+
+            ViewBag.Keyword = keyword;
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ManageUserRoles", model);
+            }
 
             return View(model);
         }
@@ -34,6 +40,33 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
         {
             EditUserRoleViewModel model = this.service.GetUserRoles(userId);
 
+            return this.View(model);
+        }
+
+        [Route("DenyUserAccess/{page:int?}/{keyword?}")]
+        [HttpGet]
+        public ActionResult DenyUserAccess(int? page, string keyword)
+        {
+            int requestedPage = this.service.GetCorrectPage(page);
+
+            IPagedList<UserViewModel> model = this.service.GetUsersToManage(requestedPage, true, false, keyword);
+            ViewBag.Keyword = keyword;
+           if (Request.IsAjaxRequest())
+            {
+                return PartialView("_DenyUserAccess", model);
+            }
+            return this.View(model);
+        }
+
+
+        [Route("AllowUserAccess/{page:int?}/{keyword?}")]
+        [HttpGet]
+        public ActionResult AllowUserAccess(int? page, string keyword)
+        {
+            int requestedPage = this.service.GetCorrectPage(page);
+            
+            IPagedList<UserViewModel> model = this.service.GetUsersToManage(requestedPage, false, false, keyword);
+            ViewBag.Keyword = keyword;
             return this.View(model);
         }
     }

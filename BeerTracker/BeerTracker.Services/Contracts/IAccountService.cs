@@ -7,8 +7,10 @@
 
     public interface IAccountService
     {
-        void CreateRegularUser(string id);
+        //void CreateRegularUser(string id);
         void RemoveFromRole(UserManager<ApplicationUser> userManager, string userId, string roleId);
         void AddToRole(UserManager<ApplicationUser> userManager, string userId, string roleId);
+        string GetUsernameIfIsActive(ApplicationUser user);
+        void ModifyUserAccess(string userId, bool isActive);
     }
 }

@@ -67,7 +67,8 @@ namespace BeerTracker.Data.Migrations
             {
                 UserName = adminUsername,
                 Email = adminEmail,
-                FullName = adminFullName
+                FullName = adminFullName,
+                IsActive = true
             };
 
             var userStore = new UserStore<ApplicationUser>(context);

@@ -12,6 +12,7 @@
         void SaveChanges();
         IRepository<ApplicationUser> AppUsers { get; }
         IRepository<RegularUser> RegularUsers { get; }
+        IRepository<Partner> Partners { get; }
         IRepository<Location> Locations { get; }
         IRepository<Beer> Beers { get; }
 
