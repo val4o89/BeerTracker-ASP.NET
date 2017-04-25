@@ -17,14 +17,15 @@
                     @using (Html.BeginForm("UserAccess", "Account", new
                     {
                         Area = "",
-                        IsActive = "false",
+                        IsActive = "true",
                         Page = Model.PageNumber,
-                        RedirectToAction = "DenyUserAccess"
+                        Keyword = ViewBag.Keyword,
+                        RedirectToAction = "AllowUserAccess"
                     }
                     , FormMethod.Post, null))
                     {
                         <input type="hidden" name="UserId" value="@user.Id" />
-                        <input class="btn btn-danger" type="submit" value="Deny Access" />
+                        <input class="btn btn-success" type="submit" value="Allow Access" />
                     }
                 </td>
             </tr>
@@ -33,7 +34,7 @@
 
 </table>
 <div class="pager">
-    @Html.PagedListPager(Model, page => Url.Action("DenyUserAccess", new
+    @Html.PagedListPager(Model, page => Url.Action("AllowUserAccess", new
 {
     page,
     keyword = ViewBag.Keyword

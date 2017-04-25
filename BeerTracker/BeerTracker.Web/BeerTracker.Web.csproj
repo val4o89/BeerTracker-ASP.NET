@@ -276,6 +276,7 @@
     <Content Include="Areas\Admin\Views\Admin\AllowUserAccess.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DenyUserAccess.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_ManageUserRoles.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AllowUserAccess.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -329,7 +330,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AdminDropdownMenu.cshtml" />
     <Content Include="Views\Shared\_RegularUserDropdownMenu.cshtml" />
-    <Content Include="Views\Shared\_DenyUserAccess.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_DenyUserAccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeerTracker.Data\BeerTracker.Data.csproj">

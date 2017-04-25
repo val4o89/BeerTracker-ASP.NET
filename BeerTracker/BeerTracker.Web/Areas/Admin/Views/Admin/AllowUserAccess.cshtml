@@ -5,38 +5,26 @@
     ViewBag.Title = "Allow User Access";
 }
 
-<h2>Allow User Access</h2>
+<h2>Deny User Access</h2>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            using (Html.BeginForm("UserAccess", "Account", new { Area = "" }, FormMethod.Post, null))
-            {
-                <tr>
-                    <td>@user.Username</td>
-                    <td hidden="hidden"><input type="text" name="UserId" value="@user.Id" /></td>
-                    <td hidden="hidden"><input type="text" name="RedirectToAction" value="AllowUserAccess" /></td>
-                    <td hidden="hidden"><input type="text" name="IsActive" value="true" /></td>
-                    <td><input class="btn btn-success" type="submit" value="Allow Access" /></td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-<div class="pager">
-    @Html.PagedListPager(Model, page => Url.Action("AllowUserAccess", new
-   {
-       page
-   }))
-    <p>Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Users</p>
+@using (Ajax.BeginForm("AllowUserAccess", "Admin", new { Area = "Admin", Page = 1 }, new AjaxOptions()
+{
+    UpdateTargetId = "element-to-replace",
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace,
+
+}, new { @class = "form-inline", role = "form" }))
+{
+    <div>
+        @Html.TextBox("keyword", null, new { type = "text", @class = "form-control", placeholder = "Search by username" })
+        <button class="btn btn-info" type="submit">Search</button>
+    </div>
+
+}
+
+<div class="col-md-10">
+    <h3>Users</h3>
+    <div id="element-to-replace">
+        @Html.Partial("_AllowUserAccess")
+    </div>
 </div>
-
-
-

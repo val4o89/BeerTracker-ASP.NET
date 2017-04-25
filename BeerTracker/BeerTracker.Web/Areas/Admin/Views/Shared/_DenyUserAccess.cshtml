@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<BeerTracker.Models.ViewModels.Admin.UserViewModel>
+@using PagedList.Mvc;
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="manage-roles-body">
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>
+                    @using (Html.BeginForm("UserAccess", "Account", new
+                    {
+                        Area = "",
+                        IsActive = "false",
+                        Page = Model.PageNumber,
+                        Keyword = ViewBag.Keyword,
+                        RedirectToAction = "DenyUserAccess"
+                    }
+                    , FormMethod.Post, null))
+                    {
+                        <input type="hidden" name="UserId" value="@user.Id" />
+                        <input class="btn btn-danger" type="submit" value="Deny Access" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<div class="pager">
+    @Html.PagedListPager(Model, page => Url.Action("DenyUserAccess", new
+{
+    page,
+    keyword = ViewBag.Keyword
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions
+{
+    HttpMethod = "get",
+    UpdateTargetId = "element-to-replace",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+    <p>Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Users</p>
+</div>
+

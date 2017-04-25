@@ -51,6 +51,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
 
             IPagedList<UserViewModel> model = this.service.GetUsersToManage(requestedPage, true, false, keyword);
             ViewBag.Keyword = keyword;
+
            if (Request.IsAjaxRequest())
             {
                 return PartialView("_DenyUserAccess", model);
@@ -67,6 +68,11 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             
             IPagedList<UserViewModel> model = this.service.GetUsersToManage(requestedPage, false, false, keyword);
             ViewBag.Keyword = keyword;
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_AllowUserAccess", model);
+            }
             return this.View(model);
         }
     }

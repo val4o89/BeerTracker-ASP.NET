@@ -478,7 +478,7 @@ namespace BeerTracker.Web.Controllers
                 this.service.ModifyUserAccess(model.UserId, model.IsActive);
             }
 
-            return RedirectToAction(model.RedirectToAction, "Admin", new { Area = "Admin" , Page = model.Page});
+            return RedirectToAction(model.RedirectToAction, "Admin", new { Area = "Admin" , Page = model.Page, Keyword = model.Keyword});
         }
         #region Helpers
         // Used for XSRF protection when adding external logins

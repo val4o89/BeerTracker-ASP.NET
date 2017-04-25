@@ -14,5 +14,7 @@
         public string RedirectToAction { get; set; }
 
         public int Page { get; set; }
+
+        public string Keyword { get; set; }
     }
 }
