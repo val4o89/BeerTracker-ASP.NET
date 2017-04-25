@@ -71,9 +71,40 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_AllowUserAccess", model);
+                return this.PartialView("_AllowUserAccess", model);
             }
             return this.View(model);
+        }
+
+        [Route("ManageBeers/{page:int?}/{keyword?}")]
+        [HttpGet]
+        public ActionResult ManageBeers(int? page, string keyword)
+        {
+            int requestedPage = this.service.GetCorrectPage(page);
+
+            IPagedList<ManageBeerViewModel> model = this.service.GetAllBeers(requestedPage, keyword);
+
+            if (Request.IsAjaxRequest())
+            {
+                return this.PartialView("_ManageBeers", model);
+            }
+            return this.View(model);
+        }
+
+        [Route("ManageBeer/{id:int}")]
+        [HttpGet]
+        public ActionResult ManageBeer(int id)
+        {
+            ManageBeerViewModel model = this.service.GetBeerById(id);
+            return this.View(model);
+        }
+
+        [Route("UpdateBeer")]
+        [HttpPost]
+        public ActionResult UpdateBeer(ManageBeerViewModel model)
+        {
+            this.service.UpdateBeer(model);
+            return this.RedirectToAction("ManageBeers");
         }
     }
 }

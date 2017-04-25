@@ -19,6 +19,8 @@
 
         }
 
+
+
         public int GetCorrectPage(int? page)
         {
             page = page ?? 1;
@@ -63,6 +65,33 @@
                 .OrderBy(u => u.UserName).ToList().Where(u => regex.IsMatch(u.UserName))
                 .Select(mapper.Map<ApplicationUser, UserViewModel>),page, elementsToTake);
 
+        }
+
+        public IPagedList<ManageBeerViewModel> GetAllBeers(int page, string keyword)
+        {
+            int elementsToTake = 10;
+            string mainPattern = "\\w*";
+            keyword = keyword ?? mainPattern;
+            var regex = new Regex(keyword + mainPattern);
+
+            return new PagedList<ManageBeerViewModel>(this.db.Beers.GetAll()
+                .OrderBy(b => b.Hider.AppUser.UserName)
+                .ToList().Where(b => regex.IsMatch(b.Hider.AppUser.UserName))
+                .Select(this.mapper.Map<Beer, ManageBeerViewModel>), page, elementsToTake);
+        }
+
+        public ManageBeerViewModel GetBeerById(int id)
+        {
+            return this.mapper.Map<Beer, ManageBeerViewModel>(this.db.Beers.FindFirst(b => b.Id == id));
+        }
+
+        public void UpdateBeer(ManageBeerViewModel model)
+        {
+            var beer = this.db.Beers.FindFirst(b => b.Id == model.Id);
+            beer.IsDeleted = model.IsDeleted;
+            beer.Manufacturer = (BeerMake)Enum.Parse(typeof(BeerMake), model.Manufacturer);
+            beer.EndOfSerialNumber = model.EndOfSerialNumber;
+            this.db.SaveChanges();
         }
     }
 }

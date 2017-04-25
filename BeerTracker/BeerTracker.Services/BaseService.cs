@@ -43,6 +43,9 @@
 
                 m.CreateMap<ApplicationUser, UserViewModel>();
 
+                m.CreateMap<Beer, ManageBeerViewModel>()
+                .ForMember(mbvm => mbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
+                .ForMember(mbvm => mbvm.HidersUsername, member => member.MapFrom(b => b.Hider.AppUser.UserName));
             });
         }
 

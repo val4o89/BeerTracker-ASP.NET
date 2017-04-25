@@ -11,5 +11,8 @@ namespace BeerTracker.Services.Contracts
         IPagedList<UserViewModel> GetUsersToManage(int page, bool areActive, bool includeAdmin, string keyword);
         EditUserRoleViewModel GetUserRoles(string userId);
         int GetCorrectPage(int? page);
+        IPagedList<ManageBeerViewModel> GetAllBeers(int requestedPage, string keyword);
+        ManageBeerViewModel GetBeerById(int id);
+        void UpdateBeer(ManageBeerViewModel model);
     }
 }

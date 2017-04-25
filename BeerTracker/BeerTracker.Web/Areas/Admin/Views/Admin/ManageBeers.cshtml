@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "ManageBeers";
+}
+
+<h2>ManageBeers</h2>
+
+@using (Ajax.BeginForm("ManageBeers", "Admin", new { Area = "Admin", Page = 1 }, new AjaxOptions()
+{
+    UpdateTargetId = "element-to-replace",
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace,
+
+}, new { @class = "form-inline", role = "form" }))
+{
+    <div>
+        @Html.TextBox("keyword", null, new { type = "text", @class = "form-control", placeholder = "Search by username" })
+        <button class="btn btn-info" type="submit">Search</button>
+    </div>
+
+}
+
+<div class="col-md-10">
+    <h3>Users</h3>
+    <div id="element-to-replace">
+        @Html.Partial("_ManageBeers")
+    </div>
+</div>

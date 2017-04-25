@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<BeerTracker.Models.ViewModels.Admin.ManageBeerViewModel>
+@using PagedList.Mvc;
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Hider's Username</th>
+            <th>Beer Make</th>
+            <th>End of beer's serial number</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="manage-roles-body">
+        @foreach (var beer in Model)
+        {
+            string status = beer.IsDeleted ? "Deleted" : "Active";
+            <tr>
+                <td>@beer.HidersUsername</td>
+                <td>@beer.Manufacturer</td>
+                <td>@beer.EndOfSerialNumber</td>
+                <td>@status</td>
+                <td>@Html.ActionLink("Manage", "ManageBeer", new { Area = "Admin", Id = beer.Id }, new { @class = "btn btn-warning" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="pager">
+    @Html.PagedListPager(Model, page => Url.Action("ManageBeers", new
+{
+    page,
+    keyword = ViewBag.Keyword
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions
+{
+    HttpMethod = "get",
+    UpdateTargetId = "element-to-replace",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+    <p>Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Users</p>
+</div>
+
+

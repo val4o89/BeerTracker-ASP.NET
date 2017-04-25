@@ -1,0 +1,46 @@
+﻿@using BeerTracker.Models.DataModels.Enums
+@model BeerTracker.Models.ViewModels.Admin.ManageBeerViewModel
+
+@{
+    ViewBag.Title = "ManageBeer";
+}
+
+<h2>ManageBeer</h2>
+@using (Html.BeginForm("UpdateBeer", "Admin", new { Area = "Admin" }, FormMethod.Post))
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Hider</th>
+                <th>Make</th>
+                <th>End of serial number</th>
+                <th>Is Deleted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td hidden="hidden">@Html.TextBoxFor(m => m.Id)</td>
+                <td>@Model.HidersUsername</td>
+                <td>
+                    @Html.DropDownListFor(x => x.Manufacturer, new SelectList(Enum.GetValues(typeof(BeerMake))), new { @class = "form-control" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.EndOfSerialNumber,
+               new
+               {
+                   type = "text",
+                   value = Model.EndOfSerialNumber,
+                   @class = "form-control",
+                   maxlength = "5",
+                   pattern = "[0-9]{5}",
+                   required = "required",
+                   title = "This fild must be exactly 5 digits"
+               })
+                </td>
+                <td>@Html.CheckBoxFor(m => m.IsDeleted, new { @class = "form-control" })</td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-info form-control">Submit Changes</button>
+}
