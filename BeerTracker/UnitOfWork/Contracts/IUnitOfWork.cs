@@ -16,6 +16,7 @@
         IRepository<Location> Locations { get; }
         IRepository<Beer> Beers { get; }
 
+        IRepository<Contest> Contests { get; }
         ICollection<IdentityRole> Roles { get; }
 
     }

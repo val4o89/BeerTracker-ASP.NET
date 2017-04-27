@@ -1,0 +1,28 @@
+﻿@model BeerTracker.Models.BindingModels.Partner.AddContestBindingModel
+
+@{
+    ViewBag.Title = "Add Contest";
+}
+
+<h2 class="col-lg-offset-2">Add Contest</h2>
+@using (Html.BeginForm("AddContest", "Partner", new { Area = "Partner" }
+, FormMethod.Post, new { @class = "form-horizontal col-md-offset-2", role = "form" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <input class="btn btn-success form-control" type="submit" value="Add"/>
+        </div>
+    </div>
+}

@@ -20,6 +20,7 @@
         private IRepository<RegularUser> regularUsers;
         private IRepository<Partner> partners;
         private IRepository<Location> locations;
+        private IRepository<Contest> contests;
         private IRepository<Beer> beers;
 
         public UnitOfWork()
@@ -45,6 +46,11 @@
         public IRepository<Location> Locations
         {
             get { return this.locations ?? (locations = new Repository<Location>(this.context)); }
+        }
+
+        public IRepository<Contest> Contests
+        {
+            get { return this.contests ?? (contests = new Repository<Contest>(this.context)); }
         }
 
         public IRepository<Beer> Beers

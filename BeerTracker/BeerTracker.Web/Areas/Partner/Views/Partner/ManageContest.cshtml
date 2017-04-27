@@ -1,0 +1,58 @@
+﻿@model BeerTracker.Models.BindingModels.Partner.ManageContestBindingModel
+@{
+    ViewBag.Title = "Manage Contest";
+}
+
+<h2>Manage Contest</h2>
+
+
+@using (Html.BeginForm("ManageContest", "Partner", new { Area = "Partner" }, FormMethod.Post,
+     new { @class = "form-horizontal col-md-offset-2", role = "form" }))
+{
+    if (!Model.IsActive)
+    {
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-2">
+                @Html.ActionLink("Add beer to this contest", "AddBeer", "Partner",
+                new { Area = "Partner", Id = Model.Id }, new { @class = "btn btn-warning form-control" })
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-3">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", value = Model.Title })
+        </div>
+    </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                <div class="col-md-3">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = "10" ,value = Model.Description })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EndDate, new { @class = "col-md-2 control-label" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", type = "date" })
+                </div>
+            </div>
+            @Html.TextBoxFor(m => m.Id, new { hidden = "hidden" })
+            <div class="form-group">
+
+                @if (!Model.IsActive)
+                {
+                    @Html.CheckBoxFor(m => m.IsActive, new { value = "true", hidden = "hidden" })
+                    <div class="col-md-3 col-md-offset-2">
+                        <input type="submit" value="Activate" class="btn btn-success form-control" />
+                    </div>
+                }
+                else
+                {
+                    @Html.CheckBoxFor(m => m.IsActive, new { value = "false", hidden = "hidden" })
+                    <div class="col-md-2 col-md-offset-2">
+                        <input type="submit" value="Deactivate" class="btn btn-danger form-control" />
+                    </div>
+                }
+            </div>
+
+}

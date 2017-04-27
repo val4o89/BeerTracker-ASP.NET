@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "MyContests";
+}
+
+<h2>MyContests</h2>
+<div class="row">
+    <div class="col-md-10">
+        <h3>Users</h3>
+        <div id="element-to-replace">
+            @Html.Partial("_MyContests")
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    @Html.ActionLink("Add Contest", "AddContest", "Partner", new { Area = "Partner" }, new { @class = "btn btn-success form-control" })
+</div>

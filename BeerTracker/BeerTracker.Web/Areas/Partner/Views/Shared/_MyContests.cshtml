@@ -1,0 +1,34 @@
+﻿@model PagedList.IPagedList<BeerTracker.Models.ViewModels.Partner.ContestViewModel>
+@using PagedList.Mvc;
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Contest Title</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="manage-roles-body">
+        @foreach (var contest in Model)
+        {
+            <tr>
+                <td>@contest.Title</td>
+                <td>@Html.ActionLink("Manage", "ManageContest", "Partner", new { Area = "Partner", Id = contest.Id }, new { @class = "btn btn-danger"})</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="pager">
+    @Html.PagedListPager(Model, page => Url.Action("MyContest", new
+{
+    page,
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions
+{
+    HttpMethod = "get",
+    UpdateTargetId = "element-to-replace",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+    <p>Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Users</p>
+</div>

@@ -1,13 +1,13 @@
 ﻿namespace BeerTracker.Services
 {
     using AutoMapper;
+    using Models.BindingModels.Partner;
     using Models.DataModels;
     using Models.ViewModels.Admin;
     using Models.ViewModels.Geo;
+    using Models.ViewModels.Partner;
     using Models.ViewModels.User;
-    using PagedList;
     using UnitOfWork.Contracts;
-    using UnitOfWork.UoW;
 
     public abstract class BaseService
     {
@@ -46,6 +46,12 @@
                 m.CreateMap<Beer, ManageBeerViewModel>()
                 .ForMember(mbvm => mbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
                 .ForMember(mbvm => mbvm.HidersUsername, member => member.MapFrom(b => b.Hider.AppUser.UserName));
+
+                m.CreateMap<AddContestBindingModel, Contest>();
+
+                m.CreateMap<Contest, ContestViewModel>();
+
+                m.CreateMap<Contest, ManageContestBindingModel>();
             });
         }
 

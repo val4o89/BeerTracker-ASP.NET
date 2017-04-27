@@ -16,6 +16,11 @@
                 @Html.Partial("_AdminDropdownMenu");
             }
 
+            @if (User.IsInRole("Partner"))
+            {
+                @Html.Partial("_PartnerDropdownMenu")
+            }
+
             @Html.Partial("_RegularUserDropdownMenu")
 
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

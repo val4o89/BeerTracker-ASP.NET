@@ -236,6 +236,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Partner\Controllers\PartnerController.cs" />
+    <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\GeoController.cs" />
     <Compile Include="Areas\User\Controllers\UserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
@@ -280,6 +282,14 @@
     <Content Include="Areas\Admin\Views\Admin\ManageBeers.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_ManageBeers.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\ManageBeer.cshtml" />
+    <Content Include="Areas\Partner\Views\web.config" />
+    <Content Include="Areas\Partner\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Partner\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Partner\Views\Partner\AddContest.cshtml" />
+    <Content Include="Areas\Partner\Views\Partner\MyContests.cshtml" />
+    <Content Include="Areas\Partner\Views\Shared\_MyContests.cshtml" />
+    <Content Include="Areas\Partner\Views\Partner\ManageContest.cshtml" />
+    <Content Include="Areas\Partner\Views\Partner\AddBeer.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -334,6 +344,7 @@
     <Content Include="Views\Shared\_AdminDropdownMenu.cshtml" />
     <Content Include="Views\Shared\_RegularUserDropdownMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_DenyUserAccess.cshtml" />
+    <Content Include="Views\Shared\_PartnerDropdownMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeerTracker.Data\BeerTracker.Data.csproj">
