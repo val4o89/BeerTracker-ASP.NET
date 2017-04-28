@@ -4,17 +4,17 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQMoKUDmz6jPN4R-9FToCuVD4Z8brWJRk" type="text/javascript"></script>
 
-@using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddBeer", "Partner", new { Area = "Partner" } ,FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <button class="btn btn-warning" onclick="getLocation()" type="reset">Locate</button>
     <hr />
     <label id="input-label" class="control-label" for="end-of-number" style="display: none">Enter last 5 digits of serial number: </label>
     <input id="end-of-number" maxlength="5" pattern="[0-9]{5}" required title="This fild must be exactly 5 digits" class="form-control" type="hidden" name="EndOfSerialNumber" />
     <br />
-    @Html.DropDownListFor(x => x.Manufacturer, new SelectList(Enum.GetValues(typeof(BeerMake))), "Select mark", new {required = "required",@class = "form-control", Id = "make-list", style = "display: none" })
+    @Html.DropDownListFor(x => x.Manufacturer, new SelectList(Enum.GetValues(typeof(BeerMake))), "Select mark", new { required = "required", @class = "form-control", Id = "make-list", style = "display: none" })
     <input id="lat" type="hidden" name="Latitude" value="" />
     <input id="long" type="hidden" name="Longitude" value="" />
-    <input id="contest-id" type="hidden" name="ContestId" value="" />
+    <input type="hidden" name="ContestId" value="@ViewBag.ContestId" />
     <br />
     <input id="my-submit-button" class="btn btn-success" type="hidden" name="Submit" value="Submit" />
 }

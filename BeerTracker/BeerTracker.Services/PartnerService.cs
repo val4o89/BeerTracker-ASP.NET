@@ -10,12 +10,32 @@
     using System.Collections.Generic;
     using System.Linq;
     using PagedList;
+    using Models.BindingModels.Geo;
+    using Models.DataModels.Enums;
 
     public class PartnerService : BaseService, IPartnerService
     {
         public PartnerService(IUnitOfWork db) : base(db)
         {
 
+        }
+
+        public void AddBeerToContest(string name, HideFindBeerBindingModel model)
+        {
+            Beer beer = new Beer
+            {
+                EndOfSerialNumber = model.EndOfSerialNumber,
+                Manufacturer = (BeerMake)Enum.Parse(typeof(BeerMake), model.Manufacturer),
+                Location = new Location
+                {
+                    Latitude = model.Latitude,
+                    Longitude = model.Longitude
+                }
+            };
+
+            this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name && c.Id == model.ContestId).Beers.Add(beer);
+
+            this.db.SaveChanges();
         }
 
         public void AddContest(string partnerName, AddContestBindingModel model)

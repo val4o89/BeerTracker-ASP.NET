@@ -1,6 +1,7 @@
 ﻿namespace BeerTracker.Services
 {
     using AutoMapper;
+    using Models.BindingModels.Geo;
     using Models.BindingModels.Partner;
     using Models.DataModels;
     using Models.ViewModels.Admin;
@@ -52,6 +53,8 @@
                 m.CreateMap<Contest, ContestViewModel>();
 
                 m.CreateMap<Contest, ManageContestBindingModel>();
+
+                
             });
         }
 

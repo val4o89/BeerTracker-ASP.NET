@@ -289,7 +289,7 @@
     <Content Include="Areas\Partner\Views\Partner\MyContests.cshtml" />
     <Content Include="Areas\Partner\Views\Shared\_MyContests.cshtml" />
     <Content Include="Areas\Partner\Views\Partner\ManageContest.cshtml" />
-    <Content Include="Areas\Partner\Views\Partner\AddBeer.cshtml" />
+    <Content Include="Areas\Partner\Views\Partner\AddBeers.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

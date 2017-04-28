@@ -21,6 +21,10 @@
 
         public virtual RegularUser Founder { get; set; }
 
+        public int? ContestId { get; set; }
+
+        public virtual Contest Contest { get; set; }
+
         public bool IsFound { get; set; }
 
         public bool IsDeleted { get; set; }

@@ -1,4 +1,5 @@
-﻿using BeerTracker.Models.BindingModels.Partner;
+﻿using BeerTracker.Models.BindingModels.Geo;
+using BeerTracker.Models.BindingModels.Partner;
 using BeerTracker.Models.ViewModels.Partner;
 using BeerTracker.Services.Contracts;
 using PagedList;
@@ -61,11 +62,21 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             return this.View(model);
         }
 
+        [Route("AddBeers/{id:int}")]
         [HttpGet]
-        [Route("AddBeer/{id:int}")]
-        public ActionResult AddBeer(int id)
+        public ActionResult AddBeers(int id)
         {
-            return this.View(id);
+            ViewBag.ContestId = id;
+            return this.View();
+        }
+
+        [HttpPost]
+        [Route("AddBeer")]
+        public ActionResult AddBeer(HideFindBeerBindingModel model)
+        {
+            this.service.AddBeerToContest(User.Identity.Name, model);
+
+            return RedirectToAction("ManageContest", new { model.ContestId });
         }
     }
 }
