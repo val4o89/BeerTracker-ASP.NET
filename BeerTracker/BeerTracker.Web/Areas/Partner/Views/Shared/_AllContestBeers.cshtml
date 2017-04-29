@@ -1,0 +1,29 @@
+﻿@model IEnumerable<BeerTracker.Models.ViewModels.Partner.ContestBeerViewModel>
+
+<div id="element-to-replace">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>End Of Serial Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var beer in Model)
+            {
+                <tr>
+                    <td>@beer.Manufacturer</td>
+                    <td>@beer.EndOfSerialNumber</td>
+                    @*<td>@Html.ActionLink("Remove", "RemoveBeer", "Partner", new { Area = "Partner", Id = beer.Id }, new { @class = "btn btn-danger" })</td>*@
+                    <td>
+                        @using (Html.BeginForm("RemoveBeer", "Partner", new { Area = "Partner", Id = beer.Id}, FormMethod.Post, new { }))
+                        {
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

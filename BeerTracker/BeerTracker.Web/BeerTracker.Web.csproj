@@ -284,12 +284,12 @@
     <Content Include="Areas\Admin\Views\Admin\ManageBeer.cshtml" />
     <Content Include="Areas\Partner\Views\web.config" />
     <Content Include="Areas\Partner\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Partner\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Partner\Views\Partner\AddContest.cshtml" />
     <Content Include="Areas\Partner\Views\Partner\MyContests.cshtml" />
     <Content Include="Areas\Partner\Views\Shared\_MyContests.cshtml" />
     <Content Include="Areas\Partner\Views\Partner\ManageContest.cshtml" />
     <Content Include="Areas\Partner\Views\Partner\AddBeers.cshtml" />
+    <Content Include="Areas\Partner\Views\Shared\_AllContestBeers.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

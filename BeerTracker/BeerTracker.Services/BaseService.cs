@@ -54,7 +54,9 @@
 
                 m.CreateMap<Contest, ManageContestBindingModel>();
 
-                
+                m.CreateMap<Beer, ContestBeerViewModel>()
+                .ForMember(cbvm => cbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()));
+
             });
         }
 

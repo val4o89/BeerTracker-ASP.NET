@@ -14,5 +14,10 @@
         int GetCorrectPage(int? page);
         ManageContestBindingModel GetContestToManage(string name, int contestId);
         void AddBeerToContest(string name, HideFindBeerBindingModel model);
+        IEnumerable<ContestBeerViewModel> GetContestBeers(int id);
+        void RemoveBeer(string name, int id);
+        int GetContestByBeerId(string username, int id);
+        void UpdateContest(string name, ManageContestBindingModel model);
+        dynamic GetContestName(int id);
     }
 }

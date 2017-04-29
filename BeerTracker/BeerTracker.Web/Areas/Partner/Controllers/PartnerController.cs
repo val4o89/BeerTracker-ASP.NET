@@ -66,6 +66,8 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         [HttpGet]
         public ActionResult AddBeers(int id)
         {
+            ViewBag.ContestTitle = this.service.GetContestName(id);
+
             ViewBag.ContestId = id;
             return this.View();
         }
@@ -77,6 +79,34 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             this.service.AddBeerToContest(User.Identity.Name, model);
 
             return RedirectToAction("ManageContest", new { model.ContestId });
+        }
+
+        [HttpPost]
+        [Route("RemoveBeer/{id:int}")]
+        public ActionResult RemoveBeer(int id)
+        {
+            this.service.RemoveBeer(User.Identity.Name, id);
+            int contestId = this.service.GetContestByBeerId(User.Identity.Name, id);
+            return RedirectToAction("ManageContest", new { contestId});
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        [Route("AllContestBeers/{id:int}")]
+        public ActionResult AllContestBeers(int id)
+        {
+            IEnumerable<ContestBeerViewModel> model = this.service.GetContestBeers(id);
+
+            return this.PartialView("_AllContestBeers", model);
+        }
+
+        [HttpPost]
+        [Route("ManageContestStatus")]
+        public ActionResult ManageContestStatus(ManageContestBindingModel model)
+        {
+            this.service.UpdateContest(User.Identity.Name, model);
+
+            return RedirectToAction("ManageContest", new { Id = model.Id });
         }
     }
 }

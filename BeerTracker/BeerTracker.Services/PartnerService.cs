@@ -12,6 +12,7 @@
     using PagedList;
     using Models.BindingModels.Geo;
     using Models.DataModels.Enums;
+    using EntityFramework.Extensions;
 
     public class PartnerService : BaseService, IPartnerService
     {
@@ -52,6 +53,23 @@
             this.db.SaveChanges();
         }
 
+        public IEnumerable<ContestBeerViewModel> GetContestBeers(int id)
+        {
+            var contestBeers = this.db.Beers.FindMany(b => b.ContestId == id && b.IsDeleted == false);
+
+            return this.mapper.Map<IEnumerable<Beer>, IEnumerable<ContestBeerViewModel>>(contestBeers);
+        }
+
+        public int GetContestByBeerId(string username, int id)
+        {
+            return this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == username && c.Beers.Any(b => b.Id == id)).Id;
+        }
+
+        public dynamic GetContestName(int id)
+        {
+            return this.db.Contests.FindFirst(c => c.Id == id).Title;
+        }
+
         public ManageContestBindingModel GetContestToManage(string name, int contestId)
         {
             return this.mapper.Map<Contest, ManageContestBindingModel>(this.db.Contests
@@ -71,6 +89,29 @@
             return new PagedList<ContestViewModel>(this.mapper.Map<IEnumerable<Contest>, IEnumerable<ContestViewModel>>
                 (this.db.Contests.FindMany(c => c.Owner.AppUser.UserName == name)
                 .OrderBy(c => c.StartDate)), page, itemsOnPage);
+        }
+
+        public void RemoveBeer(string name, int id)
+        {
+            this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name).Beers.FirstOrDefault(b => b.Id == id).IsDeleted = true;
+            this.db.SaveChanges();
+        }
+
+        public void UpdateContest(string name, ManageContestBindingModel model)
+        {
+            Contest contest = this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name && c.Id == model.Id);
+
+            if (model.IsActive)
+            {
+                contest.EndDate = model.EndDate;
+                contest.Description = model.Description;
+                contest.Title = model.Title;
+                contest.StartDate = DateTime.Now;
+            }
+
+            contest.IsActive = model.IsActive;
+
+            this.db.SaveChanges();
         }
     }
 }
