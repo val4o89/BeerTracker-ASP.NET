@@ -1,0 +1,19 @@
+﻿@model IEnumerable<BeerTracker.Models.ViewModels.User.ContestUserViewModel>
+
+@{
+    ViewBag.Title = "Contests";
+}
+
+<h1>Contests</h1>
+
+<div class="row">
+    @if (Model.Any())
+    {
+        @Html.DisplayFor(x => x)
+    }
+    else
+    {
+        <div><h2>No Contests</h2></div>
+    }
+</div>
+

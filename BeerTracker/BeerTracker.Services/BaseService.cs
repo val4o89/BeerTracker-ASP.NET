@@ -52,6 +52,9 @@
 
                 m.CreateMap<Contest, ContestViewModel>();
 
+                m.CreateMap<Contest, ContestUserViewModel>().ForMember(cuwm => cuwm.Description, member => member
+                .MapFrom(c => c.Description.Substring(0, c.Description.Length < 150 ? c.Description.Length : 150) + "..."));
+
                 m.CreateMap<Contest, ManageContestBindingModel>();
 
                 m.CreateMap<Beer, ContestBeerViewModel>()

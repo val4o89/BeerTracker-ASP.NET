@@ -61,5 +61,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.RedirectToAction("ShowAll");
         }
 
+
+
     }
 }

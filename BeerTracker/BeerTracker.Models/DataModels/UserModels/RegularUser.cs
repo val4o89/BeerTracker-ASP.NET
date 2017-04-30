@@ -14,7 +14,7 @@ namespace BeerTracker.Models.DataModels.UserModels
         {
             this.BeersFound = new HashSet<Beer>();
             this.BeersHidden = new HashSet<Beer>();
-            this.Contests = new HashSet<Contest>();
+            this.Contests = new HashSet<ContestRegularUser>();
         }
 
         public int Id { get; set; }
@@ -35,7 +35,7 @@ namespace BeerTracker.Models.DataModels.UserModels
         [InverseProperty("Hider")]
         public virtual ICollection<Beer> BeersHidden { get; set; }
 
-        public virtual ICollection<Contest> Contests { get; set; }
+        public virtual ICollection<ContestRegularUser> Contests { get; set; }
 
         [InverseProperty("Founder")]
         public virtual ICollection<Beer> BeersFound { get; set; }

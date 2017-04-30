@@ -1,0 +1,38 @@
+﻿@model BeerTracker.Models.ViewModels.User.ContestUserViewModel
+
+<div class="contest-box col-xs-4">
+    <h2>@Model.Title</h2>
+    <br />
+    <p id="description-box-@Model.Id">
+        @Model.Description
+        @Ajax.ActionLink("Show More", "GetDescription", "User", new { Area = "User", Id = Model.Id }, new AjaxOptions
+           {
+               HttpMethod = "get",
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "description-box-" + Model.Id
+           }, new { @class = "btn" })
+</p>
+<p>
+
+</p>
+<br />
+<p id="end-date-paragraph">@Model.Title will ends on @Model.EndDate.Value.ToString(@"dd/MM/yyyy")</p>
+<br />
+<p>@Html.ActionLink("Show Ranking", "Ranking", "User", new { Area = "User", ContestId = Model.Id }, new { @class = "btn btn-success" })</p>
+<br />
+    @if (!Model.IsParticipant)
+    {
+        using (Html.BeginForm("Participate", "User", new { Area = "User", ContestId = Model.Id }, FormMethod.Post, null))
+        {
+            <button type="submit" class="btn btn-info" style="margin-bottom: 8px">Participate</button>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("Unparticipate", "User", new { Area = "User", ContestId = Model.Id }, FormMethod.Post, null))
+        {
+            <button type="submit" class="btn btn-danger" style="margin-bottom: 8px">Unarticipate</button>
+        }
+    }
+
+</div>

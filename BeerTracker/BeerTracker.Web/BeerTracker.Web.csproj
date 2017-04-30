@@ -290,6 +290,9 @@
     <Content Include="Areas\Partner\Views\Partner\ManageContest.cshtml" />
     <Content Include="Areas\Partner\Views\Partner\AddBeers.cshtml" />
     <Content Include="Areas\Partner\Views\Shared\_AllContestBeers.cshtml" />
+    <Content Include="Areas\User\Views\User\Contests.cshtml" />
+    <Content Include="Areas\User\Views\Shared\DisplayTemplates\ContestUserViewModel.cshtml" />
+    <Content Include="Areas\User\Views\User\_Description.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

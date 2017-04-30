@@ -119,9 +119,11 @@
     <Compile Include="BindingModels\Account\AccessUserBindingModel.cs" />
     <Compile Include="BindingModels\Geo\HideFindBeerBindingModel.cs" />
     <Compile Include="BindingModels\Partner\AddContestBindingModel.cs" />
+    <Compile Include="BindingModels\User\ParticipateContestBindingModel.cs" />
     <Compile Include="DataModels\ApplicationUser.cs" />
     <Compile Include="DataModels\Beer.cs" />
     <Compile Include="DataModels\Contest.cs" />
+    <Compile Include="DataModels\ContestRegularUsers.cs" />
     <Compile Include="DataModels\Enums\BeerMake.cs" />
     <Compile Include="DataModels\Enums\UserRoles.cs" />
     <Compile Include="DataModels\Location.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="ViewModels\Partner\ContestBeerViewModel.cs" />
     <Compile Include="ViewModels\Partner\ContestViewModel.cs" />
     <Compile Include="BindingModels\Partner\ManageContestBindingModel.cs" />
+    <Compile Include="ViewModels\User\ContestUserViewModel.cs" />
     <Compile Include="ViewModels\User\MyBeersViewModel.cs" />
     <Compile Include="ViewModels\User\MyFoundBeerViewModel.cs" />
     <Compile Include="ViewModels\User\MyHiddenBeerViewModel.cs" />

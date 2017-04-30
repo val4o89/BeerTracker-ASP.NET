@@ -9,7 +9,7 @@
         public Contest()
         {
             this.Beers = new HashSet<Beer>();
-            this.Participants = new HashSet<RegularUser>();
+            this.Participants = new HashSet<ContestRegularUser>();
         }
 
         public int Id { get; set; }
@@ -22,7 +22,7 @@
 
         public virtual ICollection<Beer> Beers { get; set; }
 
-        public virtual ICollection<RegularUser> Participants { get; set; }
+        public virtual ICollection<ContestRegularUser> Participants { get; set; }
 
         public DateTime? StartDate { get; set; }
 
