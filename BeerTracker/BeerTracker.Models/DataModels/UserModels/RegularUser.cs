@@ -22,7 +22,7 @@ namespace BeerTracker.Models.DataModels.UserModels
         public string AppUserId { get; set; }
 
         [Required]
-        public virtual ApplicationUser AppUser { get; set; }
+        public virtual User AppUser { get; set; }
 
 
         public byte[] ProfilePicture { get; set; }

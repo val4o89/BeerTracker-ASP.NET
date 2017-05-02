@@ -16,7 +16,7 @@
     {
         private ApplicationDbContext context;
 
-        private IRepository<ApplicationUser> appUsers;
+        private IRepository<User> appUsers;
         private IRepository<RegularUser> regularUsers;
         private IRepository<Partner> partners;
         private IRepository<Location> locations;
@@ -28,9 +28,9 @@
             this.context = new ApplicationDbContext();
         }
 
-        public IRepository<ApplicationUser> AppUsers
+        public IRepository<User> AppUsers
         {
-            get { return this.appUsers ?? (appUsers = new Repository<ApplicationUser>(this.context)); }
+            get { return this.appUsers ?? (appUsers = new Repository<User>(this.context)); }
         }
 
 

@@ -1,0 +1,55 @@
+﻿@using BeerTracker.Models.DataModels.Enums
+@using BeerTracker.Models.BindingModels.Geo
+@model HideFindBeerBindingModel
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQMoKUDmz6jPN4R-9FToCuVD4Z8brWJRk" type="text/javascript"></script>
+
+@using (Html.BeginForm("FindContestBeer", "Geo", new { Area = "User" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <button class="btn btn-warning" onclick="getLocation()" type="reset">Locate</button>
+    <hr />
+    <label id="input-label" class="control-label" for="end-of-number" style="display: none">Enter last 5 digits of serial number: </label>
+    <input id="end-of-number" maxlength="5" pattern="[0-9]{5}" required title="This fild must be exactly 5 digits" class="form-control" type="hidden" name="EndOfSerialNumber" />
+    <br />
+    @Html.DropDownListFor(x => x.Manufacturer, new SelectList(Enum.GetValues(typeof(BeerMake))), "Select mark", new { required = "required", @class = "form-control", Id = "make-list", style = "display: none" })
+    <input id="lat" type="hidden" name="Latitude" value="" />
+    <input id="long" type="hidden" name="Longitude" value="" />
+    <input type="hidden" name="ContestId" value="@ViewBag.ContestId" />
+    <br />
+    <input id="my-submit-button" class="btn btn-success" type="hidden" name="Submit" value="Submit" />
+}
+<br />
+<div id="google-map" style="width:100%; height:400px;"></div>
+
+<script>
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+
+        var mapOptions = {
+            center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            zoom: 17
+        }
+
+        document.getElementById('lat').setAttribute('value', position.coords.latitude);
+        document.getElementById('long').setAttribute('value', position.coords.longitude);
+        document.getElementById('my-submit-button').setAttribute('type', 'submit');
+        document.getElementById('end-of-number').setAttribute('type', 'text');
+        document.getElementById('input-label').style.display = 'block';
+        document.getElementById('make-list').style.display = 'block';
+
+        var map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            map: map,
+        });
+    }
+</script>

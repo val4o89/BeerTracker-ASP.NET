@@ -1,0 +1,47 @@
+﻿@using BeerTracker.Models.ViewModels.Geo
+
+@model IEnumerable<BeerLocationViewModel>
+
+
+<h2>You are here &#x21D8;</h2>
+<script>
+</script>
+<div id="google-map" style="width:100%; height:400px;"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQMoKUDmz6jPN4R-9FToCuVD4Z8brWJRk" type="text/javascript"></script>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+
+        var mapOptions = {
+            center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            zoom: 17
+        }
+
+        var map = new google.maps.Map(document.getElementById("google-map"), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            map: map,
+        });
+
+        @foreach (var location in Model)
+        {
+            <text>
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(@location.Latitude, @location.Longitude),
+                    map: map,
+                    icon: '../../../Content/Images/beer.png'
+                });
+            </text>
+        }
+    }
+
+    getLocation();
+</script>

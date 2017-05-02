@@ -8,6 +8,6 @@
 
         public int EndOfSerialNumber { get; set; }
 
-        public string Miner { get; set; }
+        public string Hider { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model List<BeerTracker.Models.ViewModels.User.UserRankViewModel>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            var rank = i + 1;
+            <tr>
+                <td>@rank</td>
+                <td>@Model[i].Username</td>
+                <td>@Model[i].UserScores</td>
+            </tr>
+        }
+    </tbody>
+</table>

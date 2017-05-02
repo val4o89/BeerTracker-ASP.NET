@@ -65,6 +65,12 @@
             };
         }
 
+        public IEnumerable<UserRankViewModel> GetContestRanking(int id)
+        {
+            var ranking = this.db.Contests.FindFirst(c => c.Id == id).Participants.OrderByDescending(p => p.UserScores).Take(10);
+            return this.mapper.Map<IEnumerable<ContestRegularUser>, IEnumerable<UserRankViewModel>>(ranking);
+        }
+
         public string GetDescription(int id)
         {
             return this.db.Contests.FindFirst(c => c.Id == id).Description;

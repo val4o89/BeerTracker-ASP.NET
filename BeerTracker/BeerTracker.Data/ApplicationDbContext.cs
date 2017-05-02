@@ -7,7 +7,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()   
             : base("BeerTracker")

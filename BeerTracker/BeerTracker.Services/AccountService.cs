@@ -31,7 +31,7 @@
         //    this.db.SaveChanges();
         //}
 
-        public void RemoveFromRole(UserManager<ApplicationUser> userManager, string userId, string roleName)
+        public void RemoveFromRole(UserManager<User> userManager, string userId, string roleName)
         {
             var removeRoleResult = userManager.RemoveFromRole(userId, roleName);
 
@@ -45,7 +45,7 @@
             }
         }
 
-        public void AddToRole(UserManager<ApplicationUser> userManager, string userId, string roleName)
+        public void AddToRole(UserManager<User> userManager, string userId, string roleName)
         {
             var addRoleResult = userManager.AddToRole(userId, roleName);
 
@@ -104,7 +104,7 @@
             this.db.SaveChanges();
         }
 
-        public string GetUsernameIfIsActive(ApplicationUser user)
+        public string GetUsernameIfIsActive(User user)
         {
             return user.IsActive ? user.UserName : string.Empty;
         }

@@ -20,9 +20,10 @@
 
         public IEnumerable<BeerLocationViewModel> GetLocations()
         {
-            IEnumerable<Location> locations = this.db.Locations.FindMany(l => l.Beer.IsFound == false);
-
-            var loc = new Location();
+            IEnumerable<Location> locations = this.db.Locations.FindMany(
+                l => l.Beer.IsFound == false 
+                && l.Beer.IsDeleted == false 
+                && l.Beer.Hider != null);
 
             var models = this.mapper.Map<IEnumerable<Location>, IEnumerable<BeerLocationViewModel>>(locations);
 
@@ -99,6 +100,47 @@
             }
 
             return false;
+        }
+
+        public IEnumerable<BeerLocationViewModel> GetBeersOfContest(int id)
+        {
+            IEnumerable<Location> locations = this.db.Contests.FindFirst(c => c.Id == id)
+                .Beers.Where(b => b.IsFound == false && b.IsDeleted == false).Select(b => b.Location);
+
+            return this.mapper.Map<IEnumerable<Location>, IEnumerable<BeerLocationViewModel>>(locations);
+        }
+
+        public string GetUserIdByUsername(string name)
+        {
+            return this.db.AppUsers.FindFirst(u => u.UserName == name).Id;
+        }
+
+        public void FindContestBeer(string userId, HideFindBeerBindingModel model)
+        {
+            var loggedUser = this.db.RegularUsers.FindFirst(u => u.AppUserId == userId);
+
+            var appUser = loggedUser.AppUser;
+
+            var foundBeer = this.db.Beers.FindFirst(b => b.IsFound == false &&
+            b.EndOfSerialNumber == model.EndOfSerialNumber &&
+            b.Manufacturer.ToString() == model.Manufacturer);
+
+            if (foundBeer != null)
+            {
+
+                var distance = this.GetDistanceDifference(foundBeer.Location.Latitude, foundBeer.Location.Longitude,
+                               model.Latitude, model.Longitude);
+
+                if (IfDistanceIsValid(distance, 0.3))
+                {
+                    foundBeer.IsFound = true;
+                    foundBeer.Founder = loggedUser;
+                    loggedUser.Contests.FirstOrDefault(c => c.ContestId == model.ContestId).UserScores++;
+                    loggedUser.Points++;
+
+                    this.db.SaveChanges();
+                }
+            }
         }
     }
 }

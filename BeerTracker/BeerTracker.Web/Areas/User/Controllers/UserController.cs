@@ -70,5 +70,14 @@ namespace BeerTracker.Web.Areas.User.Controllers
 
             return RedirectToAction("Contests");
         }
+
+        [Route("Ranking/{id:int}")]
+        [HttpGet]
+        public ActionResult ShowRanking(int id)
+        {
+            IEnumerable<UserRankViewModel> model = this.service.GetContestRanking(id);
+
+            return this.PartialView("_Ranking", model);
+        }
     }
 }

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Contest Beers";
+}
+
+<h2>Contest Beers</h2>
+
+
+
+<div id="element-to-replace">
+    @Ajax.ActionLink("You Have Found Beer?", "FindContestBeers", "Geo", new { Area = "User", Id = ViewBag.ContestId }, new AjaxOptions
+{
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "element-to-replace"
+}
+, new { @class = "btn btn-warning" })
+
+    @{Html.RenderPartial("ShowAll");}
+</div>
+

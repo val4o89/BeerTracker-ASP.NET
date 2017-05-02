@@ -1,4 +1,5 @@
 ﻿using BeerTracker.Models.BindingModels.Geo;
+using BeerTracker.Models.ViewModels.Geo;
 using BeerTracker.Services;
 using BeerTracker.Services.Contracts;
 using System;
@@ -61,7 +62,36 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.RedirectToAction("ShowAll");
         }
 
+        [Route("ShowContestBeers/{id:int}")]
+        [HttpGet]
+        public ActionResult ShowContestBeers(int id)
+        {
+            IEnumerable<BeerLocationViewModel> model = this.service.GetBeersOfContest(id);
 
+            ViewBag.ContestId = id;
+
+            return this.View(model);
+        }
+
+        [Route("FindContestBeers/{id:int}")]
+        [HttpGet]
+        public ActionResult FindContestBeers(int id)
+        {
+            ViewBag.ContestId = id;
+
+            return this.PartialView("_FindContestBeer");
+        }
+
+        [Route("FindContestBeer")]
+        [HttpPost]
+        public ActionResult FindContestBeer(HideFindBeerBindingModel model)
+        {
+            string userId = this.service.GetUserIdByUsername(User.Identity.Name);
+
+            this.service.FindContestBeer(userId, model);
+
+            return this.RedirectToAction("ShowContestBeers", new { Id = model.ContestId });
+        }
 
     }
 }

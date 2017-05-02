@@ -10,7 +10,7 @@
     public interface IUnitOfWork
     {
         void SaveChanges();
-        IRepository<ApplicationUser> AppUsers { get; }
+        IRepository<User> AppUsers { get; }
         IRepository<RegularUser> RegularUsers { get; }
         IRepository<Partner> Partners { get; }
         IRepository<Location> Locations { get; }

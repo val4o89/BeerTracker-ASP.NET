@@ -14,5 +14,6 @@
         void AddUserToContest(string name, ParticipateContestBindingModel model);
         string GetUserIdByName(string name);
         void RemoveUserFromContest(string userId, ParticipateContestBindingModel model);
+        IEnumerable<UserRankViewModel> GetContestRanking(int id);
     }
 }

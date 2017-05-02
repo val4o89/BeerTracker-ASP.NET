@@ -63,7 +63,7 @@ namespace BeerTracker.Data.Migrations
 
         private void CreateAdminUser(ApplicationDbContext context, string adminEmail, string adminFullName, string adminUsername, string adminPass, string adminRole)
         {
-            var adminUser = new ApplicationUser
+            var adminUser = new User
             {
                 UserName = adminUsername,
                 Email = adminEmail,
@@ -71,9 +71,9 @@ namespace BeerTracker.Data.Migrations
                 IsActive = true
             };
 
-            var userStore = new UserStore<ApplicationUser>(context);
+            var userStore = new UserStore<User>(context);
 
-            var userManager = new UserManager<ApplicationUser>(userStore);
+            var userManager = new UserManager<User>(userStore);
 
             userManager.PasswordValidator = new PasswordValidator
             {
@@ -94,7 +94,7 @@ namespace BeerTracker.Data.Migrations
             this.AddUserInRole(userManager, adminUser.Id, adminRole);
         }
 
-        private void AddUserInRole(UserManager<ApplicationUser> userManager, string adminUserId, string adminRole)
+        private void AddUserInRole(UserManager<User> userManager, string adminUserId, string adminRole)
         {
             var addAdminToRoleResult = userManager.AddToRole(adminUserId, adminRole);
 

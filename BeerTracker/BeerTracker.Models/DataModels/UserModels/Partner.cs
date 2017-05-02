@@ -16,7 +16,7 @@
         public string AppUserId { get; set; }
 
         [Required]
-        public virtual ApplicationUser AppUser { get; set; }
+        public virtual User AppUser { get; set; }
 
         [Required]
         public DateTime RegistrationDate { get; set; }

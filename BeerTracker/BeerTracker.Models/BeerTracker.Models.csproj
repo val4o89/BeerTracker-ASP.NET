@@ -120,7 +120,7 @@
     <Compile Include="BindingModels\Geo\HideFindBeerBindingModel.cs" />
     <Compile Include="BindingModels\Partner\AddContestBindingModel.cs" />
     <Compile Include="BindingModels\User\ParticipateContestBindingModel.cs" />
-    <Compile Include="DataModels\ApplicationUser.cs" />
+    <Compile Include="DataModels\User.cs" />
     <Compile Include="DataModels\Beer.cs" />
     <Compile Include="DataModels\Contest.cs" />
     <Compile Include="DataModels\ContestRegularUsers.cs" />
@@ -159,6 +159,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\User\UserRankViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BindingModels\Admin\" />

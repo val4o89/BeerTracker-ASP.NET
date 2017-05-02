@@ -293,6 +293,10 @@
     <Content Include="Areas\User\Views\User\Contests.cshtml" />
     <Content Include="Areas\User\Views\Shared\DisplayTemplates\ContestUserViewModel.cshtml" />
     <Content Include="Areas\User\Views\User\_Description.cshtml" />
+    <Content Include="Areas\User\Views\User\_Ranking.cshtml" />
+    <Content Include="Areas\User\Views\Geo\ShowContestBeers.cshtml" />
+    <Content Include="Areas\User\Views\Geo\_ShowAll.cshtml" />
+    <Content Include="Areas\User\Views\Geo\_FindContestBeer.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />

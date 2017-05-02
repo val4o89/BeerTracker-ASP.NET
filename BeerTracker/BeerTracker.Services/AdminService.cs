@@ -63,7 +63,7 @@
             return new PagedList<UserViewModel>(this.db.AppUsers.FindMany(u => u.IsActive == areActive)
                 .Where(u => !u.Roles.Any(r => r.RoleId == adminRoleId))
                 .OrderBy(u => u.UserName).ToList().Where(u => regex.IsMatch(u.UserName))
-                .Select(mapper.Map<ApplicationUser, UserViewModel>),page, elementsToTake);
+                .Select(mapper.Map<User, UserViewModel>),page, elementsToTake);
 
         }
 

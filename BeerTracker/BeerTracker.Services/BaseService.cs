@@ -36,13 +36,13 @@
 
                 m.CreateMap<Beer, MyFoundBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
-                .ForMember(mfbvm => mfbvm.Miner, member => member.MapFrom(b => b.Hider.AppUser.UserName));
+                .ForMember(mfbvm => mfbvm.Hider, member => member.MapFrom(b => b.Hider != null ?b.Hider.AppUser.UserName : b.Contest.Title + " Contest"));
 
                 m.CreateMap<Beer, MyHiddenBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
                 .ForMember(mfbvm => mfbvm.Founder, member => member.MapFrom(b => b.Founder.AppUser.UserName));
 
-                m.CreateMap<ApplicationUser, UserViewModel>();
+                m.CreateMap<User, UserViewModel>();
 
                 m.CreateMap<Beer, ManageBeerViewModel>()
                 .ForMember(mbvm => mbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
@@ -59,6 +59,10 @@
 
                 m.CreateMap<Beer, ContestBeerViewModel>()
                 .ForMember(cbvm => cbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()));
+
+                m.CreateMap<ContestRegularUser, UserRankViewModel>()
+                .ForMember(urvm => urvm.UserScores, member => member.MapFrom(cr => cr.UserScores))
+                .ForMember(urvm => urvm.Username, member => member.MapFrom(cr => cr.RegularUser.AppUser.UserName));
 
             });
         }
