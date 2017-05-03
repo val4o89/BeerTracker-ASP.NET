@@ -20,7 +20,7 @@
                 <td>@beer.Manufacturer</td>
                 <td>@beer.EndOfSerialNumber</td>
                 <td>@status</td>
-                <td>@Html.ActionLink("Manage", "ManageBeer", new { Area = "Admin", Id = beer.Id }, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("Manage", "Beer", new { Area = "", Id = beer.Id }, new { @class = "btn btn-warning" })</td>
             </tr>
         }
     </tbody>

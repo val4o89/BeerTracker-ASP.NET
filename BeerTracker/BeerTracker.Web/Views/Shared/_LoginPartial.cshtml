@@ -1,11 +1,10 @@
 ﻿@if (Request.IsAuthenticated && (User.IsInRole("RegularUser") || User.IsInRole("Administrator")))
 {
     <ul class="nav navbar-nav navbar-left">
-        <li>@Html.ActionLink("Show All", "ShowAll", "Geo", new { Area = "User" }, new { id = "my-location" })</li>
-        <li>@Html.ActionLink("Hide Beer", "HideBeer", "Geo", new { Area = "User" }, null)</li>
-        <li>@Html.ActionLink("Find Beer", "FindBeer", "Geo", new { Area = "User" }, null)</li>
+        
+        @Html.Partial("_BeerDropdownMenu")
         <li>@Html.ActionLink("Contests", "Contests", "User", new { Area = "User" }, null)</li>
-        <li>@Html.ActionLink("Ranking", "FullRanking", "User", new { Area = "User" }, null)</li>
+        <li>@Html.ActionLink("Ranking", "MainRanking", "User", new { Area = "User" }, null)</li>
     </ul>
     using (Html.BeginForm("LogOff", "Account", new { Area = "" }, FormMethod.Post, htmlAttributes: new { id = "logoutForm", @class = "navbar-right" }))
     {

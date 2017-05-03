@@ -30,7 +30,7 @@
             return models;
         }
 
-        public void HideBeer(HideFindBeerBindingModel model, string name)
+        public bool HideBeer(HideFindBeerBindingModel model, string name)
         {
             var user = this.db.RegularUsers.FindFirst(ru => ru.AppUser.UserName == name);
 
@@ -52,10 +52,19 @@
                 }
             });
 
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void FindBeer(HideFindBeerBindingModel model, string username)
+        public bool FindBeer(HideFindBeerBindingModel model, string username)
         {
             var loggedUser = this.db.RegularUsers.FindFirst(u => u.AppUser.UserName == username);
             var appUser = loggedUser.AppUser;
@@ -68,7 +77,7 @@
             {
                 if (foundBeer.Hider == loggedUser)
                 {
-                    return;
+                    return false;
                 }
 
                 var distance = this.GetDistanceDifference(foundBeer.Location.Latitude, foundBeer.Location.Longitude, 
@@ -80,10 +89,18 @@
                     foundBeer.Founder = loggedUser;
                     loggedUser.Points++;
 
-                    this.db.SaveChanges();
+                    try
+                    {
+                        this.db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
-
             }
+            return false;
         }
 
         private double GetDistanceDifference(double firstPointLat, double firstPointLong, double secondPointLat, double secondPointLong)
@@ -115,7 +132,7 @@
             return this.db.AppUsers.FindFirst(u => u.UserName == name).Id;
         }
 
-        public void FindContestBeer(string userId, HideFindBeerBindingModel model)
+        public bool FindContestBeer(string userId, HideFindBeerBindingModel model)
         {
             var loggedUser = this.db.RegularUsers.FindFirst(u => u.AppUserId == userId);
 
@@ -127,7 +144,6 @@
 
             if (foundBeer != null)
             {
-
                 var distance = this.GetDistanceDifference(foundBeer.Location.Latitude, foundBeer.Location.Longitude,
                                model.Latitude, model.Longitude);
 
@@ -138,9 +154,18 @@
                     loggedUser.Contests.FirstOrDefault(c => c.ContestId == model.ContestId).UserScores++;
                     loggedUser.Points++;
 
-                    this.db.SaveChanges();
+                    try
+                    {
+                        this.db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException)
+                    {
+                        return false;
+                    }
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

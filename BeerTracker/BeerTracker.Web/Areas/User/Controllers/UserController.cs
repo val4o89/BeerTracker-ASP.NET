@@ -2,6 +2,7 @@
 using BeerTracker.Models.ViewModels.Geo;
 using BeerTracker.Models.ViewModels.User;
 using BeerTracker.Services.Contracts;
+using BeerTracker.Web.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
 {
 
     [Authorize(Roles = "Administrator, RegularUser")]
-    [RouteArea("User")]
+    [RouteArea("User", AreaPrefix = "")]
     [RoutePrefix("User")]
     public class UserController : Controller
     {
@@ -53,10 +54,19 @@ namespace BeerTracker.Web.Areas.User.Controllers
         [HttpPost]
         public ActionResult Participate(ParticipateContestBindingModel model)
         {
-            string userId = this.service.GetUserIdByName(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                string userId = this.service.GetUserIdByName(User.Identity.Name);
 
-            this.service.AddUserToContest(userId, model);
+                bool isSucceeded = this.service.AddUserToContest(userId, model);
 
+                if (isSucceeded)
+                {
+                    this.AddNotification($"{User.Identity.Name} has been added successfuly!", NotificationType.SUCCESS);
+                    return RedirectToAction("Contests");
+                }
+            }
+            this.AddNotification($"{ User.Identity.Name} has NOT been added!", NotificationType.ERROR);
             return RedirectToAction("Contests");
         }
 
@@ -64,10 +74,20 @@ namespace BeerTracker.Web.Areas.User.Controllers
         [HttpPost]
         public ActionResult Unparticipate(ParticipateContestBindingModel model)
         {
-            string userId = this.service.GetUserIdByName(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                string userId = this.service.GetUserIdByName(User.Identity.Name);
 
-            this.service.RemoveUserFromContest(userId, model);
+                bool isRemoved = this.service.RemoveUserFromContest(userId, model);
 
+                if (isRemoved)
+                {
+                    this.AddNotification($"{User.Identity.Name} has been removed from this contest", NotificationType.SUCCESS);
+                    return RedirectToAction("Contests");
+                }
+            }
+
+            this.AddNotification($"{User.Identity.Name} has NOT been removed from this contest", NotificationType.ERROR);
             return RedirectToAction("Contests");
         }
 
@@ -78,6 +98,15 @@ namespace BeerTracker.Web.Areas.User.Controllers
             IEnumerable<UserRankViewModel> model = this.service.GetContestRanking(id);
 
             return this.PartialView("_Ranking", model);
+        }
+
+        [Route("MainRanking")]
+        [HttpGet]
+        public ActionResult MainRanking()
+        {
+            IEnumerable<UserRankViewModel> model = this.service.GetRanking();
+
+            return this.View(model);
         }
     }
 }

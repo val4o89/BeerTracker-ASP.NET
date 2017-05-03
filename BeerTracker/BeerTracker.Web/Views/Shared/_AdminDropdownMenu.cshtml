@@ -1,8 +1,8 @@
 ﻿<li>
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin</a>
     <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Manage User Roles", "ManageUserRoles", "Admin", new { Area = "Admin" }, new { title = "Add User To Role", @class = "dropdown open" })</li>
-        <li>@Html.ActionLink("Manage Beers", "ManageBeers", "Admin", new { Area = "Admin" }, new { title = "ManageBeers", @class = "dropdown open" })</li>
+        <li>@Html.ActionLink("Manage User Roles", "UserRoles", "Admin", new { Area = "" }, new { title = "Add User To Role", @class = "dropdown open" })</li>
+        <li>@Html.ActionLink("Manage Beers", "Beers", "Admin", new { Area = "" }, new { title = "ManageBeers", @class = "dropdown open" })</li>
         <li>@Html.ActionLink("Allow User Access", "AllowUserAccess", "Admin", new { Area = "Admin", Page = 1 }, new { title = "Allow User Access", @class = "dropdown open" })</li>
         <li>@Html.ActionLink("Deny User Access", "DenyUserAccess", "Admin", new { Area = "Admin", Page = 1 }, new { title = "Deny User Access", @class = "dropdown open" })</li>
     </ul>

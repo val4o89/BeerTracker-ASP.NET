@@ -1,0 +1,9 @@
+﻿<li>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Beers</a>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("Show All", "ShowAll", "Geo", new { Area = "User" }, new { id = "my-location", title = "Show All Beers", @class = "dropdown open" })</li>
+        <li>@Html.ActionLink("Hide Beer", "HideBeer", "Geo", new { Area = "User" }, new { title = "Hide Beer", @class = "dropdown open" })</li>
+        <li>@Html.ActionLink("Find Beer", "FindBeer", "Geo", new { Area = "User"}, new { title = "Allow User Access", @class = "dropdown open" })</li>
+    </ul>
+</li>
+

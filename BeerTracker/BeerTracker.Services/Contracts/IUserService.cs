@@ -11,9 +11,10 @@
         MyBeersViewModel GetAllMyBeers(string name);
         IEnumerable<ContestUserViewModel> GetAllContests(string name);
         string GetDescription(int id);
-        void AddUserToContest(string name, ParticipateContestBindingModel model);
+        bool AddUserToContest(string name, ParticipateContestBindingModel model);
         string GetUserIdByName(string name);
-        void RemoveUserFromContest(string userId, ParticipateContestBindingModel model);
+        bool RemoveUserFromContest(string userId, ParticipateContestBindingModel model);
         IEnumerable<UserRankViewModel> GetContestRanking(int id);
+        IEnumerable<UserRankViewModel> GetRanking();
     }
 }

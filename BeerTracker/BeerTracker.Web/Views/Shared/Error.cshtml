@@ -7,3 +7,12 @@
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 
+@*@model BeerTracker.Models.ViewModels.Error.ErrorViewModel
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">@Model.Message</h1>
+<h2 class="text-danger">An error occurred while processing your request with status code @Model.StatusCode.</h2>*@
+

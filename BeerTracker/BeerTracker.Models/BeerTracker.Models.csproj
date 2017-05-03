@@ -115,10 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ValidateRoleToRemoveAttribute.cs" />
+    <Compile Include="Attributes\ValidateSerialNumberAttribute.cs" />
     <Compile Include="BindingModels\Account\ManageUserRoleBindingModel.cs" />
     <Compile Include="BindingModels\Account\AccessUserBindingModel.cs" />
     <Compile Include="BindingModels\Geo\HideFindBeerBindingModel.cs" />
     <Compile Include="BindingModels\Partner\AddContestBindingModel.cs" />
+    <Compile Include="BindingModels\RemoveBeerBindingModel.cs" />
     <Compile Include="BindingModels\User\ParticipateContestBindingModel.cs" />
     <Compile Include="DataModels\User.cs" />
     <Compile Include="DataModels\Beer.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="ViewModels\Admin\EditUserRoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\ManageBeerViewModel.cs" />
     <Compile Include="ViewModels\Admin\UserViewModel.cs" />
+    <Compile Include="ViewModels\Error\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Geo\BeerLocationViewModel.cs" />
     <Compile Include="ViewModels\Geo\LocateBeerViewModel.cs" />
     <Compile Include="ViewModels\Partner\ContestBeerViewModel.cs" />

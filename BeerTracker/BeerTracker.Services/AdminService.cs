@@ -75,8 +75,7 @@
             var regex = new Regex(keyword + mainPattern);
 
             return new PagedList<ManageBeerViewModel>(this.db.Beers.GetAll()
-                .OrderBy(b => b.Hider.AppUser.UserName)
-                .ToList().Where(b => regex.IsMatch(b.Hider.AppUser.UserName))
+                .ToList().Where(b => b.Hider != null ?  regex.IsMatch(b.Hider.AppUser.UserName) : regex.IsMatch(b.Contest.Owner.AppUser.UserName))
                 .Select(this.mapper.Map<Beer, ManageBeerViewModel>), page, elementsToTake);
         }
 

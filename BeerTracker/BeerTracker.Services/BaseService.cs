@@ -4,6 +4,7 @@
     using Models.BindingModels.Geo;
     using Models.BindingModels.Partner;
     using Models.DataModels;
+    using Models.DataModels.UserModels;
     using Models.ViewModels.Admin;
     using Models.ViewModels.Geo;
     using Models.ViewModels.Partner;
@@ -36,7 +37,7 @@
 
                 m.CreateMap<Beer, MyFoundBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
-                .ForMember(mfbvm => mfbvm.Hider, member => member.MapFrom(b => b.Hider != null ?b.Hider.AppUser.UserName : b.Contest.Title + " Contest"));
+                .ForMember(mfbvm => mfbvm.Hider, member => member.MapFrom(b => b.Hider != null ? b.Hider.AppUser.UserName : b.Contest.Title + " Contest"));
 
                 m.CreateMap<Beer, MyHiddenBeerViewModel>()
                 .ForMember(mfbvm => mfbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
@@ -46,7 +47,8 @@
 
                 m.CreateMap<Beer, ManageBeerViewModel>()
                 .ForMember(mbvm => mbvm.Manufacturer, member => member.MapFrom(b => b.Manufacturer.ToString()))
-                .ForMember(mbvm => mbvm.HidersUsername, member => member.MapFrom(b => b.Hider.AppUser.UserName));
+                .ForMember(mbvm => mbvm.HidersUsername, member => member
+                .MapFrom(b => b.Hider != null ? b.Hider.AppUser.UserName : b.Contest.Owner.AppUser.UserName));
 
                 m.CreateMap<AddContestBindingModel, Contest>();
 
@@ -63,6 +65,10 @@
                 m.CreateMap<ContestRegularUser, UserRankViewModel>()
                 .ForMember(urvm => urvm.UserScores, member => member.MapFrom(cr => cr.UserScores))
                 .ForMember(urvm => urvm.Username, member => member.MapFrom(cr => cr.RegularUser.AppUser.UserName));
+
+                m.CreateMap<RegularUser, UserRankViewModel>()
+                .ForMember(urvm => urvm.UserScores, member => member.MapFrom(ru => ru.Points))
+                .ForMember(urvm => urvm.Username, member => member.MapFrom(ru => ru.AppUser.UserName));
 
             });
         }

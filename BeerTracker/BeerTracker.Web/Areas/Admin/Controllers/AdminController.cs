@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BeerTracker.Web.Areas.Admin.Controllers
 {
-    [RouteArea("Admin")]
+    [RouteArea("Admin", AreaPrefix = "")]
     [RoutePrefix("Admin")]
     public class AdminController : Controller
     {
@@ -16,7 +16,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             this.service = service;
         }
 
-        [Route("ManageUserRoles/{page:int?}/{keyword?}")]
+        [Route("UserRoles/{page:int?}/{keyword?}")]
         [HttpGet]
         public ActionResult ManageUserRoles(int? page, string keyword)
         {
@@ -76,7 +76,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return this.View(model);
         }
 
-        [Route("ManageBeers/{page:int?}/{keyword?}")]
+        [Route("Beers/{page:int?}/{keyword?}")]
         [HttpGet]
         public ActionResult ManageBeers(int? page, string keyword)
         {
@@ -91,7 +91,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return this.View(model);
         }
 
-        [Route("ManageBeer/{id:int}")]
+        [Route("Beer/{id:int}")]
         [HttpGet]
         public ActionResult ManageBeer(int id)
         {

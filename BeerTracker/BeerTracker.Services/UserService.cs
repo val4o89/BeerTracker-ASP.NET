@@ -10,6 +10,7 @@
     using UnitOfWork.Contracts;
     using Models.BindingModels.User;
     using Models.DataModels.UserModels;
+    using System.Data.Entity.Validation;
 
     public class UserService : BaseService, IUserService
     {
@@ -18,7 +19,7 @@
 
         }
 
-        public void AddUserToContest(string userId, ParticipateContestBindingModel model)
+        public bool AddUserToContest(string userId, ParticipateContestBindingModel model)
         {
             int regularUserId = this.db.RegularUsers.FindFirst(u => u.AppUserId == userId).Id;
 
@@ -27,7 +28,16 @@
                 RegularUserId = regularUserId
             });
 
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IEnumerable<ContestUserViewModel> GetAllContests(string username)
@@ -76,12 +86,19 @@
             return this.db.Contests.FindFirst(c => c.Id == id).Description;
         }
 
+        public IEnumerable<UserRankViewModel> GetRanking()
+        {
+            IEnumerable<RegularUser> ranking =
+                this.db.RegularUsers.GetAll().OrderByDescending(u => u.Points).ThenBy(u => u.RegistrationDate);
+            return this.mapper.Map<IEnumerable<RegularUser>, IEnumerable<UserRankViewModel>>(ranking);
+        }
+
         public string GetUserIdByName(string name)
         {
             return this.db.AppUsers.FindFirst(u => u.UserName == name).Id;
         }
 
-        public void RemoveUserFromContest(string userId, ParticipateContestBindingModel model)
+        public bool RemoveUserFromContest(string userId, ParticipateContestBindingModel model)
         {
             int regularUserId = this.db.RegularUsers.FindFirst(u => u.AppUserId == userId).Id;
 
@@ -90,7 +107,16 @@
 
             this.db.Contests.FindFirst(c => c.Id == model.ContestId).Participants.Remove(contestUser);
 
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

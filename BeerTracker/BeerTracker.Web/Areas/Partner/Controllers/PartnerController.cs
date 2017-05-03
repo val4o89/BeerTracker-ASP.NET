@@ -1,7 +1,9 @@
-﻿using BeerTracker.Models.BindingModels.Geo;
+﻿using BeerTracker.Models.BindingModels;
+using BeerTracker.Models.BindingModels.Geo;
 using BeerTracker.Models.BindingModels.Partner;
 using BeerTracker.Models.ViewModels.Partner;
 using BeerTracker.Services.Contracts;
+using BeerTracker.Web.Extensions;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ using System.Web.Mvc;
 
 namespace BeerTracker.Web.Areas.Partner.Controllers
 {
-    [RouteArea("Partner")]
+    [RouteArea("Partner", AreaPrefix = "")]
     [RoutePrefix("Partner")]
     public class PartnerController : Controller
     {
@@ -48,8 +50,18 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         [Route("AddContest")]
         public ActionResult AddContest(AddContestBindingModel model)
         {
-            this.service.AddContest(User.Identity.Name, model);
+            if (ModelState.IsValid)
+            {
+                bool isAdded = this.service.AddContest(User.Identity.Name, model);
 
+                if (isAdded)
+                {
+                    this.AddNotification($"Contest {model.Title} has been added!", NotificationType.SUCCESS);
+                    return RedirectToAction("MyContests");
+                }
+            }
+
+            this.AddNotification($"Contest {model.Title} has NOT been added!", NotificationType.ERROR);
             return RedirectToAction("MyContests");
         }
 
@@ -76,18 +88,42 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         [Route("AddBeer")]
         public ActionResult AddBeer(HideFindBeerBindingModel model)
         {
-            this.service.AddBeerToContest(User.Identity.Name, model);
+            if (ModelState.IsValid)
+            {
+                bool isAdded = this.service.AddBeerToContest(User.Identity.Name, model);
 
+                if (isAdded)
+                {
+                    this.AddNotification("A beer has been added!", NotificationType.SUCCESS);
+                    return RedirectToAction("ManageContest", new { model.ContestId });
+                }
+            }
+
+            this.AddNotification("A beer has NOT been added!", NotificationType.ERROR);
             return RedirectToAction("ManageContest", new { model.ContestId });
         }
 
         [HttpPost]
-        [Route("RemoveBeer/{id:int}")]
-        public ActionResult RemoveBeer(int id)
+        [Route("RemoveBeer")]
+        public ActionResult RemoveBeer(RemoveBeerBindingModel model)
         {
-            this.service.RemoveBeer(User.Identity.Name, id);
-            int contestId = this.service.GetContestByBeerId(User.Identity.Name, id);
-            return RedirectToAction("ManageContest", new { contestId});
+            int contestId;
+
+            if (ModelState.IsValid)
+            {
+                bool isRemoved = this.service.RemoveBeer(User.Identity.Name, model.Id);
+
+                if (isRemoved)
+                {
+                    this.AddNotification("Beer has been removed", NotificationType.SUCCESS);
+                    contestId = this.service.GetContestByBeerId(User.Identity.Name, model.Id);
+                    return RedirectToAction("ManageContest", new { contestId });
+                }
+            }
+
+            this.AddNotification("Beer has NOT been removed", NotificationType.ERROR);
+            contestId = this.service.GetContestByBeerId(User.Identity.Name, model.Id);
+            return RedirectToAction("ManageContest", new { contestId });
         }
 
         [HttpGet]
@@ -104,8 +140,19 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         [Route("ManageContestStatus")]
         public ActionResult ManageContestStatus(ManageContestBindingModel model)
         {
-            this.service.UpdateContest(User.Identity.Name, model);
+            if (ModelState.IsValid)
+            {
+                bool isUpdated = this.service.UpdateContest(User.Identity.Name, model);
 
+                if (isUpdated)
+                {
+                    string status = model.IsActive ? "activated" : "deactivated";
+                    this.AddNotification($"{model.Title} contest has been {status}!", NotificationType.SUCCESS);
+                    return RedirectToAction("ManageContest", new { Id = model.Id });
+                }
+            }
+
+            this.AddNotification($"{model.Title} contest has NOT been updated!", NotificationType.ERROR);
             return RedirectToAction("ManageContest", new { Id = model.Id });
         }
     }

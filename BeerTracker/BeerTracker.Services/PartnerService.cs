@@ -13,6 +13,7 @@
     using Models.BindingModels.Geo;
     using Models.DataModels.Enums;
     using EntityFramework.Extensions;
+    using System.Data.Entity.Validation;
 
     public class PartnerService : BaseService, IPartnerService
     {
@@ -21,7 +22,7 @@
 
         }
 
-        public void AddBeerToContest(string name, HideFindBeerBindingModel model)
+        public bool AddBeerToContest(string name, HideFindBeerBindingModel model)
         {
             Beer beer = new Beer
             {
@@ -36,10 +37,19 @@
 
             this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name && c.Id == model.ContestId).Beers.Add(beer);
 
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void AddContest(string partnerName, AddContestBindingModel model)
+        public bool AddContest(string partnerName, AddContestBindingModel model)
         {
             Partner partner = this.db.Partners.FindFirst(p => p.AppUser.UserName == partnerName);
 
@@ -49,8 +59,19 @@
                 Description = model.Description,
                 Title = model.Title
             };
+
             this.db.Contests.Add(contest);
-            this.db.SaveChanges();
+
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IEnumerable<ContestBeerViewModel> GetContestBeers(int id)
@@ -91,15 +112,30 @@
                 .OrderBy(c => c.StartDate)), page, itemsOnPage);
         }
 
-        public void RemoveBeer(string name, int id)
+        public bool RemoveBeer(string name, int id)
         {
             this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name).Beers.FirstOrDefault(b => b.Id == id).IsDeleted = true;
-            this.db.SaveChanges();
+
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void UpdateContest(string name, ManageContestBindingModel model)
+        public bool UpdateContest(string name, ManageContestBindingModel model)
         {
             Contest contest = this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name && c.Id == model.Id);
+
+            if (contest == null)
+            {
+                return false;
+            }
 
             if (model.IsActive)
             {
@@ -111,7 +147,16 @@
 
             contest.IsActive = model.IsActive;
 
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

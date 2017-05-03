@@ -242,8 +242,10 @@
     <Compile Include="Areas\User\Controllers\UserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Extensions\NotificationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -297,6 +299,7 @@
     <Content Include="Areas\User\Views\Geo\ShowContestBeers.cshtml" />
     <Content Include="Areas\User\Views\Geo\_ShowAll.cshtml" />
     <Content Include="Areas\User\Views\Geo\_FindContestBeer.cshtml" />
+    <Content Include="Areas\User\Views\User\MainRanking.cshtml" />
     <None Include="Properties\PublishProfiles\beer-tracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\beer-tracker - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
@@ -352,6 +355,8 @@
     <Content Include="Views\Shared\_RegularUserDropdownMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_DenyUserAccess.cshtml" />
     <Content Include="Views\Shared\_PartnerDropdownMenu.cshtml" />
+    <Content Include="Views\Shared\_BeerDropdownMenu.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeerTracker.Data\BeerTracker.Data.csproj">
