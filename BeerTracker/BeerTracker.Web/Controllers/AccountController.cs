@@ -14,6 +14,7 @@ using BeerTracker.Services;
 using BeerTracker.Services.Contracts;
 using BeerTracker.Models.DataModels.Enums;
 using BeerTracker.Models.BindingModels.Account;
+using BeerTracker.Web.Extensions;
 
 namespace BeerTracker.Web.Controllers
 {
@@ -448,36 +449,62 @@ namespace BeerTracker.Web.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult RemoveRole(ManageUserRoleBindingModel model)
         {
             if (ModelState.IsValid)
             {
-                this.service.RemoveFromRole(UserManager, model.UserId, model.RoleName);
+                bool isRemoved = this.service.RemoveFromRole(UserManager, model.UserId, model.RoleName);
+
+                if (isRemoved)
+                {
+                    this.AddNotification($"{model.RoleName} role has been removed from this user", NotificationType.SUCCESS);
+                    return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId });
+                }
             }
 
+            this.AddNotification($"{model.RoleName} role has NOT been removed from this user", NotificationType.ERROR);
             return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId });
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult AddRole(ManageUserRoleBindingModel model)
         {
             if (ModelState.IsValid)
             {
-                this.service.AddToRole(UserManager, model.UserId, model.RoleName);
+                bool isAdded = this.service.AddToRole(UserManager, model.UserId, model.RoleName);
+
+                if (isAdded)
+                {
+                    this.AddNotification($"Role {model.RoleName} has been added to this user", NotificationType.SUCCESS);
+                    return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId });
+                }
             }
 
+            this.AddNotification($"Role {model.RoleName} has NOT been added to this user", NotificationType.ERROR);
             return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId});
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult UserAccess(AccessUserBindingModel model)
         {
             if (ModelState.IsValid)
             {
-                this.service.ModifyUserAccess(model.UserId, model.IsActive);
+                bool isModified = this.service.ModifyUserAccess(model.UserId, model.IsActive);
+
+                if (isModified)
+                {
+                    string access = model.IsActive ? "allowed" : "denied";
+
+                    this.AddNotification($"User access has been {access}!", NotificationType.SUCCESS);
+                    return RedirectToAction(model.RedirectToAction, "Admin", new { Area = "Admin", Page = model.Page, Keyword = model.Keyword });
+                }
             }
 
+            this.AddNotification($"User access has NOT been modified!", NotificationType.SUCCESS);
             return RedirectToAction(model.RedirectToAction, "Admin", new { Area = "Admin" , Page = model.Page, Keyword = model.Keyword});
         }
         #region Helpers

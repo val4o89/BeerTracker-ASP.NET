@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace BeerTracker.Web.Areas.Partner.Controllers
 {
+    [Authorize(Roles = "Partner")]
     [RouteArea("Partner", AreaPrefix = "")]
     [RoutePrefix("Partner")]
     public class PartnerController : Controller
@@ -40,7 +41,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         }
 
         [HttpGet]
-        [Route("AddContest")]
+        [Route("Contest")]
         public ActionResult AddContest()
         {
             return View();
@@ -66,7 +67,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         }
 
         [HttpGet]
-        [Route("ManageContest/{contestId:int}")]
+        [Route("Contests/{contestId:int}")]
         public ActionResult ManageContest(int contestId)
         {
             ManageContestBindingModel model = this.service.GetContestToManage(User.Identity.Name, contestId);
@@ -74,7 +75,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             return this.View(model);
         }
 
-        [Route("AddBeers/{id:int}")]
+        [Route("Beers/{id:int}")]
         [HttpGet]
         public ActionResult AddBeers(int id)
         {
@@ -85,7 +86,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         }
 
         [HttpPost]
-        [Route("AddBeer")]
+        [Route("Beer")]
         public ActionResult AddBeer(HideFindBeerBindingModel model)
         {
             if (ModelState.IsValid)
@@ -95,12 +96,12 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
                 if (isAdded)
                 {
                     this.AddNotification("A beer has been added!", NotificationType.SUCCESS);
-                    return RedirectToAction("ManageContest", new { model.ContestId });
+                    return RedirectToAction("Contests", "Partner", new { Area = "", Id = model.ContestId });
                 }
             }
 
             this.AddNotification("A beer has NOT been added!", NotificationType.ERROR);
-            return RedirectToAction("ManageContest", new { model.ContestId });
+            return RedirectToAction("Contests", "Partner", new { Area = "", Id = model.ContestId });
         }
 
         [HttpPost]
@@ -117,13 +118,13 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
                 {
                     this.AddNotification("Beer has been removed", NotificationType.SUCCESS);
                     contestId = this.service.GetContestByBeerId(User.Identity.Name, model.Id);
-                    return RedirectToAction("ManageContest", new { contestId });
+                    return RedirectToAction("Contests", "Partner", new { Area = "", Id = contestId });
                 }
             }
 
             this.AddNotification("Beer has NOT been removed", NotificationType.ERROR);
             contestId = this.service.GetContestByBeerId(User.Identity.Name, model.Id);
-            return RedirectToAction("ManageContest", new { contestId });
+            return RedirectToAction("Contests", "Partner", new { Area = "", Id = contestId });
         }
 
         [HttpGet]
@@ -137,7 +138,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
         }
 
         [HttpPost]
-        [Route("ManageContestStatus")]
+        [Route("ContestStatus")]
         public ActionResult ManageContestStatus(ManageContestBindingModel model)
         {
             if (ModelState.IsValid)
@@ -148,12 +149,12 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
                 {
                     string status = model.IsActive ? "activated" : "deactivated";
                     this.AddNotification($"{model.Title} contest has been {status}!", NotificationType.SUCCESS);
-                    return RedirectToAction("ManageContest", new { Id = model.Id });
+                    return RedirectToAction("Contests", "Partner", new { Area = "", Id = model.Id });
                 }
             }
 
             this.AddNotification($"{model.Title} contest has NOT been updated!", NotificationType.ERROR);
-            return RedirectToAction("ManageContest", new { Id = model.Id });
+            return RedirectToAction("Contests", "Partner", new { Area = "", Id = model.Id });
         }
     }
 }

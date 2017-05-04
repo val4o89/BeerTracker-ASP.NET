@@ -12,7 +12,6 @@ using System.Web.Mvc;
 namespace BeerTracker.Web.Areas.User.Controllers
 {
 
-    [Authorize(Roles = "Administrator, RegularUser")]
     [RouteArea("User", AreaPrefix = "")]
     [RoutePrefix("User")]
     public class UserController : Controller
@@ -24,6 +23,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             this.service = service;
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("MyBeers")]
         [HttpGet]
         public ActionResult MyBeers()
@@ -50,6 +50,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.PartialView("_Description", description);
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("Participate")]
         [HttpPost]
         public ActionResult Participate(ParticipateContestBindingModel model)
@@ -70,6 +71,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return RedirectToAction("Contests");
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("Unparticipate")]
         [HttpPost]
         public ActionResult Unparticipate(ParticipateContestBindingModel model)

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BeerTracker.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [RouteArea("Admin", AreaPrefix = "")]
     [RoutePrefix("Admin")]
     public class AdminController : Controller

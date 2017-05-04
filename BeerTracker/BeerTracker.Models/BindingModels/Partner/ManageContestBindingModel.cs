@@ -12,6 +12,7 @@
 
         public string Description { get; set; }
 
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
         public bool IsActive { get; set; }

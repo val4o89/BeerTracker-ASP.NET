@@ -8,9 +8,9 @@
     public interface IAccountService
     {
         //void CreateRegularUser(string id);
-        void RemoveFromRole(UserManager<User> userManager, string userId, string roleId);
-        void AddToRole(UserManager<User> userManager, string userId, string roleId);
+        bool RemoveFromRole(UserManager<User> userManager, string userId, string roleId);
+        bool AddToRole(UserManager<User> userManager, string userId, string roleId);
         string GetUsernameIfIsActive(User user);
-        void ModifyUserAccess(string userId, bool isActive);
+        bool ModifyUserAccess(string userId, bool isActive);
     }
 }

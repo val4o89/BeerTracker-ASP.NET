@@ -11,7 +11,6 @@ using System.Web.Mvc;
 
 namespace BeerTracker.Web.Areas.User.Controllers
 {
-    [Authorize(Roles = "Administrator, RegularUser")]
     [RouteArea("User", AreaPrefix = "")]
     [RoutePrefix("Geo")]
     public class GeoController : Controller
@@ -23,7 +22,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             this.service = service;
         }
 
-        [Route("ShowAll")]
+        [Route("Beers")]
         [HttpGet]
         public ActionResult ShowAll()
         {
@@ -32,6 +31,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.View(model);
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("HideBeer")]
         [HttpGet]
         public ActionResult HideBeer()
@@ -39,6 +39,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.View();
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("HideBeer")]
         [HttpPost]
         public ActionResult HideBeer(HideFindBeerBindingModel model)
@@ -49,15 +50,16 @@ namespace BeerTracker.Web.Areas.User.Controllers
 
                 if (isCreated)
                 {
-                    this.AddNotification("Beer created!", NotificationType.SUCCESS);
+                    this.AddNotification("A Beer has been hidden!", NotificationType.SUCCESS);
                     return this.RedirectToAction("ShowAll");
                 }
             }
 
-            this.AddNotification("Beer was not created!", NotificationType.ERROR);
+            this.AddNotification("Beer has not been hidden!", NotificationType.ERROR);
             return this.RedirectToAction("HideBeer");
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("FindBeer")]
         [HttpGet]
         public ActionResult FindBeer()
@@ -65,6 +67,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.View();
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("FindBeer")]
         [HttpPost]
         public ActionResult FindBeer(HideFindBeerBindingModel model)
@@ -94,6 +97,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.View(model);
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("FindContestBeers/{id:int}")]
         [HttpGet]
         public ActionResult FindContestBeers(int id)
@@ -103,6 +107,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.PartialView("_FindContestBeer");
         }
 
+        [Authorize(Roles = "RegularUser")]
         [Route("FindContestBeer")]
         [HttpPost]
         public ActionResult FindContestBeer(HideFindBeerBindingModel model)

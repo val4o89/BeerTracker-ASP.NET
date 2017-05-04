@@ -38,7 +38,7 @@ namespace BeerTracker.Web.Controllers
             return View("Error", model);
         }
 
-        public ActionResult NotFound(string aspxerrorpath)
+        public ActionResult NotFound()
         {
             Response.StatusCode = 404;
             var model = new ErrorViewModel
@@ -47,7 +47,7 @@ namespace BeerTracker.Web.Controllers
                 StatusCode = 404
             };
 
-            return View(model);
+            return View("Error");
         }
         public ActionResult InternalServerError()
         {

@@ -1,6 +1,6 @@
 ﻿@model BeerTracker.Models.ViewModels.User.ContestUserViewModel
 
-<div class="contest-box col-xs-4">
+<div class="contest-box col-md-4">
     <h2>@Model.Title</h2>
     <br />
     <p id="description-box-@Model.Id">
@@ -20,7 +20,7 @@
     <br />
     <p hidden="hidden" id="loading-@Model.Id">Showing ranking...</p>
     <p id="ranking-@Model.Id">
-        @Ajax.ActionLink("Show Ranking", "Ranking", "User", new { Area = "User", Id = Model.Id }, new AjaxOptions
+        @Ajax.ActionLink("Show Ranking", "Ranking", "User", new { Area = "", Id = Model.Id }, new AjaxOptions
    {
        HttpMethod = "get",
        InsertionMode = InsertionMode.Replace,

@@ -31,35 +31,37 @@
         //    this.db.SaveChanges();
         //}
 
-        public void RemoveFromRole(UserManager<User> userManager, string userId, string roleName)
+        public bool RemoveFromRole(UserManager<User> userManager, string userId, string roleName)
         {
             var removeRoleResult = userManager.RemoveFromRole(userId, roleName);
 
             if (removeRoleResult.Succeeded)
             {
                 this.RetrieveInstanceForRole(userId, roleName, false);
+                return true;
             }
             else
             {
-                throw new Exception(string.Join(";", removeRoleResult.Errors));
+                return false;
             }
         }
 
-        public void AddToRole(UserManager<User> userManager, string userId, string roleName)
+        public bool AddToRole(UserManager<User> userManager, string userId, string roleName)
         {
             var addRoleResult = userManager.AddToRole(userId, roleName);
 
             if (addRoleResult.Succeeded)
             {
                 this.RetrieveInstanceForRole(userId, roleName, true);
+                return true;
             }
             else
             {
-                throw new Exception(string.Join(";", addRoleResult.Errors));
+                return false;
             }
         }
 
-        private void RetrieveInstanceForRole(string userId, string roleName, bool isActive)
+        private bool RetrieveInstanceForRole(string userId, string roleName, bool isActive)
         {
             if (roleName == UserRoles.RegularUser.ToString())
             {
@@ -101,7 +103,16 @@
                 }
             }
 
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public string GetUsernameIfIsActive(User user)
@@ -109,10 +120,19 @@
             return user.IsActive ? user.UserName : string.Empty;
         }
 
-        public void ModifyUserAccess(string userId, bool isActive)
+        public bool ModifyUserAccess(string userId, bool isActive)
         {
             this.db.AppUsers.FindFirst(u => u.Id == userId).IsActive = isActive;
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (DbEntityValidationException)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

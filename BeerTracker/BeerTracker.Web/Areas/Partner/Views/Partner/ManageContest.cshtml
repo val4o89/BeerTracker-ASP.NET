@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        @using (Html.BeginForm("ManageContestStatus", "Partner", new { Area = "Partner" }, FormMethod.Post,
+        @using (Html.BeginForm("ContestStatus", "Partner", new { Area = "" }, FormMethod.Post,
                                          new { @class = "form-horizontal", role = "form" }))
         {
             if (!Model.IsActive)
@@ -61,8 +61,8 @@
             Html.RenderAction("AllContestBeers", "Partner", new { Area = "Partner", Id = Model.Id });
             <div class="form-group">
                 <div>
-                    @Html.ActionLink("Add beer to this contest", "AddBeers", "Partner",
-             new { Area = "Partner", Id = Model.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Add beer to this contest", "Beers", "Partner",
+             new { Area = "", Id = Model.Id }, new { @class = "btn btn-warning" })
                 </div>
             </div>
         }

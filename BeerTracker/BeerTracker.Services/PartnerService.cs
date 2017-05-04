@@ -114,7 +114,7 @@
 
         public bool RemoveBeer(string name, int id)
         {
-            this.db.Contests.FindFirst(c => c.Owner.AppUser.UserName == name).Beers.FirstOrDefault(b => b.Id == id).IsDeleted = true;
+            this.db.Beers.FindFirst(b => b.Contest.Owner.AppUser.UserName == name && b.Id == id).IsDeleted = true;
 
             try
             {
