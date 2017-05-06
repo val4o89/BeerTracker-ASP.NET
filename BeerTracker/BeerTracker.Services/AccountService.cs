@@ -117,7 +117,12 @@
 
         public string GetUsernameIfIsActive(User user)
         {
-            return user.IsActive ? user.UserName : string.Empty;
+            if (user != null)
+            {
+                return user.IsActive ? user.UserName : string.Empty;
+            }
+
+            return string.Empty;
         }
 
         public bool ModifyUserAccess(string userId, bool isActive)

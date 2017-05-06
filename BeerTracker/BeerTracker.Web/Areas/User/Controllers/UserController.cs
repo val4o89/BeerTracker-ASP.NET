@@ -50,6 +50,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.PartialView("_Description", description);
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "RegularUser")]
         [Route("Participate")]
         [HttpPost]
@@ -63,14 +64,15 @@ namespace BeerTracker.Web.Areas.User.Controllers
 
                 if (isSucceeded)
                 {
-                    this.AddNotification($"{User.Identity.Name} has been added successfuly!", NotificationType.SUCCESS);
+                    this.AddNotification($"{User.Identity.Name} was joined successfuly!", NotificationType.SUCCESS);
                     return RedirectToAction("Contests");
                 }
             }
-            this.AddNotification($"{ User.Identity.Name} has NOT been added!", NotificationType.ERROR);
+            this.AddNotification($"{ User.Identity.Name} wasn't joined to contest!", NotificationType.ERROR);
             return RedirectToAction("Contests");
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "RegularUser")]
         [Route("Unparticipate")]
         [HttpPost]
@@ -84,12 +86,12 @@ namespace BeerTracker.Web.Areas.User.Controllers
 
                 if (isRemoved)
                 {
-                    this.AddNotification($"{User.Identity.Name} has been removed from this contest", NotificationType.SUCCESS);
+                    this.AddNotification($"{User.Identity.Name} was retreated to this contest", NotificationType.SUCCESS);
                     return RedirectToAction("Contests");
                 }
             }
 
-            this.AddNotification($"{User.Identity.Name} has NOT been removed from this contest", NotificationType.ERROR);
+            this.AddNotification($"{User.Identity.Name} wasn't retreated to this contest", NotificationType.ERROR);
             return RedirectToAction("Contests");
         }
 

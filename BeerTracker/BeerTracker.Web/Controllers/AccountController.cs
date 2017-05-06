@@ -449,6 +449,7 @@ namespace BeerTracker.Web.Controllers
             base.Dispose(disposing);
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult RemoveRole(ManageUserRoleBindingModel model)
@@ -468,6 +469,7 @@ namespace BeerTracker.Web.Controllers
             return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId });
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult AddRole(ManageUserRoleBindingModel model)
@@ -487,6 +489,7 @@ namespace BeerTracker.Web.Controllers
             return RedirectToAction("EditRole", "Admin", new { Area = "Admin", model.UserId});
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult UserAccess(AccessUserBindingModel model)

@@ -1,6 +1,6 @@
 ﻿@model BeerTracker.Models.ViewModels.User.ContestUserViewModel
 
-<div class="contest-box col-md-4">
+<div class="contest-box col-md-3 col-xs-1">
     <h2>@Model.Title</h2>
     <br />
     <p id="description-box-@Model.Id">
@@ -28,7 +28,7 @@
        LoadingElementId = "loading-" + Model.Id,
        LoadingElementDuration = 250,
        OnBegin = $"showParagraph('{Model.Id}')"
-            },
+   },
         new { @class = "btn btn-success" })
     </p>
     <br />
@@ -36,18 +36,20 @@
     {
         using (Html.BeginForm("Participate", "User", new { Area = "User", ContestId = Model.Id }, FormMethod.Post, null))
         {
+            Html.AntiForgeryToken();
             <button type="submit" class="btn btn-info" style="margin-bottom: 8px">Participate</button>
         }
     }
     else
     {
         <p>
-            @Html.ActionLink("Show Beers", "ShowContestBeers", "Geo", new { Area = "User", Id = Model.Id}, new { @class = "btn btn-warning"} )
+            @Html.ActionLink("Show Beers", "ShowContestBeers", "Geo", new { Area = "User", Id = Model.Id }, new { @class = "btn btn-warning" })
         </p>
 
         <br />
         using (Html.BeginForm("Unparticipate", "User", new { Area = "User", ContestId = Model.Id }, FormMethod.Post, null))
         {
+            Html.AntiForgeryToken();
             <button type="submit" class="btn btn-danger" style="margin-bottom: 8px">Unarticipate</button>
         }
     }

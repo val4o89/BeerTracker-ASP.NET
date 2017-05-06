@@ -10,6 +10,7 @@
         @using (Html.BeginForm("ContestStatus", "Partner", new { Area = "" }, FormMethod.Post,
                                          new { @class = "form-horizontal", role = "form" }))
         {
+            @Html.AntiForgeryToken()
             if (!Model.IsActive)
             {
                 <div class="form-group">

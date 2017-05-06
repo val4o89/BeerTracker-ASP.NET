@@ -100,6 +100,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return this.View(model);
         }
 
+        [ValidateAntiForgeryToken]
         [Route("UpdateBeer")]
         [HttpPost]
         public ActionResult UpdateBeer(ManageBeerViewModel model)

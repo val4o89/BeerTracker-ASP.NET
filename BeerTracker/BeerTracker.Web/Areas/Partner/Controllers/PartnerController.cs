@@ -47,6 +47,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             return View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("AddContest")]
         public ActionResult AddContest(AddContestBindingModel model)
@@ -85,6 +86,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             return this.View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("Beer")]
         public ActionResult AddBeer(HideFindBeerBindingModel model)
@@ -104,6 +106,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             return RedirectToAction("Contests", "Partner", new { Area = "", Id = model.ContestId });
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("RemoveBeer")]
         public ActionResult RemoveBeer(RemoveBeerBindingModel model)
@@ -137,6 +140,7 @@ namespace BeerTracker.Web.Areas.Partner.Controllers
             return this.PartialView("_AllContestBeers", model);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("ContestStatus")]
         public ActionResult ManageContestStatus(ManageContestBindingModel model)

@@ -39,6 +39,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.View();
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "RegularUser")]
         [Route("HideBeer")]
         [HttpPost]
@@ -67,6 +68,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.View();
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "RegularUser")]
         [Route("FindBeer")]
         [HttpPost]
@@ -107,6 +109,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             return this.PartialView("_FindContestBeer");
         }
 
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "RegularUser")]
         [Route("FindContestBeer")]
         [HttpPost]

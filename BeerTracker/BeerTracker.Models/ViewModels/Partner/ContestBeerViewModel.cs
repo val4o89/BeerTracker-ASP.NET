@@ -8,6 +8,6 @@
 
         public string Manufacturer { get; set; }
 
-        public int EndOfSerialNumber { get; set; }
+        public string EndOfSerialNumber { get; set; }
     }
 }

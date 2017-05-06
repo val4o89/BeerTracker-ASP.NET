@@ -13,6 +13,8 @@
 
 @using (Html.BeginForm("Beer", "Partner", new { Area = "" } ,FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+     Html.AntiForgeryToken();
+
     <button class="btn btn-warning" onclick="getLocation()" type="reset">Locate</button>
     <hr />
     <label id="input-label" for="end-of-number" style="display: none">Enter last 5 digits of serial number: </label>
