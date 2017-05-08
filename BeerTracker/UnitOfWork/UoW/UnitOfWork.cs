@@ -23,9 +23,9 @@
         private IRepository<Contest> contests;
         private IRepository<Beer> beers;
 
-        public UnitOfWork()
+        public UnitOfWork(ApplicationDbContext context)
         {
-            this.context = new ApplicationDbContext();
+            this.context = context;
         }
 
         public IRepository<User> AppUsers

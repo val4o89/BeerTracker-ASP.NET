@@ -24,7 +24,7 @@
                     }
                     , FormMethod.Post, null))
                     {
-                        Html.AntiForgeryToken();
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="UserId" value="@user.Id" />
                         <input class="btn btn-danger" type="submit" value="Deny Access" />
                     }

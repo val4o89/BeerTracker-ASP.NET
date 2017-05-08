@@ -16,6 +16,7 @@ namespace BeerTracker.Web.App_Start
     using System.IO;
     using UnitOfWork.Contracts;
     using UnitOfWork.UoW;
+    using Data;
 
     public static class NinjectWebCommon 
     {

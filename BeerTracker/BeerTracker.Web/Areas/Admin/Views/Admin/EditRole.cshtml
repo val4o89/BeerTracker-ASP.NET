@@ -24,7 +24,7 @@
                 {
                     using (Html.BeginForm("RemoveRole", "Account", new { Area = "" }, FormMethod.Post, new { onsubmit = $"return isValid('{@role}')" }))
                     {
-                        Html.AntiForgeryToken();
+                        @Html.AntiForgeryToken()
                         <tr>
                             <td>@role</td>
                             <td hidden="hidden"><input type="text" name="roleName" value="@role" /></td>
@@ -53,7 +53,7 @@
                 {
                     using (Html.BeginForm("AddRole", "Account", new { Area = "" }, FormMethod.Post, null))
                     {
-                        Html.AntiForgeryToken();
+                        @Html.AntiForgeryToken()
                         <tr>
                             <td>@role</td>
                             <td hidden="hidden"><input type="text" name="roleName" value="@role" /></td>

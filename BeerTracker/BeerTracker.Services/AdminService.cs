@@ -19,8 +19,6 @@
 
         }
 
-
-
         public int GetCorrectPage(int? page)
         {
             page = page ?? 1;

@@ -19,7 +19,7 @@
                     <td>
                         @using (Html.BeginForm("RemoveBeer", "Partner", new { Area = "Partner", Id = beer.Id}, FormMethod.Post, new { }))
                         {
-                            Html.AntiForgeryToken();
+                            @Html.AntiForgeryToken()
                             <button class="btn btn-danger" type="submit">Remove</button>
                         }
                     </td>

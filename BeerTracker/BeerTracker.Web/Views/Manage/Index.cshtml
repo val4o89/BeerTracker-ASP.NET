@@ -30,7 +30,7 @@
             enctype = "multipart/form-data"
         }))
         {
-            Html.AntiForgeryToken();
+            @Html.AntiForgeryToken()
 
             <input type="file" name="file" value="" class="form-control" />
             <input type="submit" name="submit" value="Upload picture" class="btn btn-success" />

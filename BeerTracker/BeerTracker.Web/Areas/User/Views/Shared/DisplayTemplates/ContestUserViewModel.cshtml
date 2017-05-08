@@ -36,7 +36,7 @@
     {
         using (Html.BeginForm("Participate", "User", new { Area = "User", ContestId = Model.Id }, FormMethod.Post, null))
         {
-            Html.AntiForgeryToken();
+            @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-info" style="margin-bottom: 8px">Participate</button>
         }
     }
@@ -49,7 +49,7 @@
         <br />
         using (Html.BeginForm("Unparticipate", "User", new { Area = "User", ContestId = Model.Id }, FormMethod.Post, null))
         {
-            Html.AntiForgeryToken();
+            @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-danger" style="margin-bottom: 8px">Unarticipate</button>
         }
     }

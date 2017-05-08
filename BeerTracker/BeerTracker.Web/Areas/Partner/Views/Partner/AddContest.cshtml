@@ -8,7 +8,7 @@
 @using (Html.BeginForm("AddContest", "Partner", new { Area = "" }
 , FormMethod.Post, new { @class = "form-horizontal col-md-offset-2", role = "form" }))
 {
-     Html.AntiForgeryToken();
+     @Html.AntiForgeryToken()
 
     <div class="form-group">
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })

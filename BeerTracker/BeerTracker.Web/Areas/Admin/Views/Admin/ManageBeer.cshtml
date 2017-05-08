@@ -8,7 +8,7 @@
 <h2>ManageBeer</h2>
 @using (Html.BeginForm("UpdateBeer", "Admin", new { Area = "Admin" }, FormMethod.Post))
 {
-    Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
 
     <table class="table table-bordered">
         <thead>

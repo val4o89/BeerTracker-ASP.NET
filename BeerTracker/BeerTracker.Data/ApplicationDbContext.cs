@@ -1,5 +1,6 @@
 ﻿namespace BeerTracker.Data
 {
+    using Contracts;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.DataModels;
     using Models.DataModels.UserModels;
@@ -7,7 +8,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
 
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>, IDbContext
     {
         public ApplicationDbContext()   
             : base("BeerTracker")
