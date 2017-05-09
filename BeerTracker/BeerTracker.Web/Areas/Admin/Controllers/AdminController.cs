@@ -18,6 +18,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
         }
 
         [Route("UserRoles/{page:int?}/{keyword?}")]
+        [OutputCache(Duration = 1)]
         [HttpGet]
         public ActionResult ManageUserRoles(int? page, string keyword)
         {
@@ -44,6 +45,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return this.View(model);
         }
 
+        [OutputCache(Duration = 1)]
         [Route("DenyUserAccess/{page:int?}/{keyword?}")]
         [HttpGet]
         public ActionResult DenyUserAccess(int? page, string keyword)
@@ -60,7 +62,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return this.View(model);
         }
 
-
+        [OutputCache(Duration = 1)]
         [Route("AllowUserAccess/{page:int?}/{keyword?}")]
         [HttpGet]
         public ActionResult AllowUserAccess(int? page, string keyword)
@@ -77,6 +79,7 @@ namespace BeerTracker.Web.Areas.Admin.Controllers
             return this.View(model);
         }
 
+        [OutputCache(Duration = 1)]
         [Route("Beers/{page:int?}/{keyword?}")]
         [HttpGet]
         public ActionResult ManageBeers(int? page, string keyword)

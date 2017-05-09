@@ -55,9 +55,9 @@ namespace BeerTracker.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "125213288038378",
+               appSecret: "45d579f9a06332b2b1b697eacf47989d");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
