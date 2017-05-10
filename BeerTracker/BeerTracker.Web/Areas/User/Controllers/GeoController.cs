@@ -26,7 +26,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
         [HttpGet]
         public ActionResult ShowAll()
         {
-            var model = this.service.GetLocations();
+            IEnumerable<BeerLocationViewModel> model = this.service.GetLocations();
 
             return this.View(model);
         }
@@ -47,7 +47,8 @@ namespace BeerTracker.Web.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool isCreated = this.service.HideBeer(model, User.Identity.Name);
+
+                bool isCreated = this.service.HideBeer(model, User?.Identity.Name);
 
                 if (isCreated)
                 {
@@ -59,6 +60,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
             this.AddNotification("Beer has not been hidden!", NotificationType.ERROR);
             return this.RedirectToAction("HideBeer");
         }
+
 
         [Authorize(Roles = "RegularUser")]
         [Route("FindBeer")]
@@ -76,7 +78,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool isFound = this.service.FindBeer(model, User.Identity.Name);
+                bool isFound = this.service.FindBeer(model, User?.Identity.Name);
 
                 if (isFound)
                 {
@@ -117,7 +119,7 @@ namespace BeerTracker.Web.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
-                string userId = this.service.GetUserIdByUsername(User.Identity.Name);
+                string userId = this.service.GetUserIdByUsername(User?.Identity.Name);
 
                 bool isFound = this.service.FindContestBeer(userId, model);
 
